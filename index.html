@@ -3,7 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Studio</title>
+<title>QR Studio — Free QR Code Generator with Tracking | by Vedang Soni</title>
+<meta name="description" content="QR Studio is a free, powerful QR code generator supporting 12 types: URL, WiFi, UPI, Contact, WhatsApp, SMS, Location, Event and more. Built-in scan tracking via Google Sheets. Created by Vedang Soni.">
+<meta name="keywords" content="QR code generator, free QR generator, QR tracking, URL QR code, WiFi QR code, UPI QR code, vCard QR, WhatsApp QR, bulk QR generator, QR scanner, Google Sheets QR tracking, Vedang Soni">
+<meta name="author" content="Vedang Soni">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#080a12">
+<link rel="canonical" href="https://smsvedang.github.io/qr-studio/">
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://smsvedang.github.io/qr-studio/">
+<meta property="og:title" content="QR Studio — Free QR Code Generator with Tracking">
+<meta property="og:description" content="Generate trackable QR codes for URL, WiFi, UPI, Contact, WhatsApp, Location & more. Scan analytics in Google Sheets. Free forever. No server needed.">
+<meta property="og:image" content="https://smsvedang.github.io/qr-studio/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="QR Studio by Vedang Soni">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QR Studio — Free QR Code Generator with Tracking">
+<meta name="twitter:description" content="12 QR types · Scan tracking via Google Sheets · Logo overlay · Bulk generate · QR Scanner. Free forever.">
+<meta name="twitter:image" content="https://smsvedang.github.io/qr-studio/og-image.png">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QR Studio",
+  "url": "https://smsvedang.github.io/qr-studio/",
+  "description": "Free QR code generator supporting 12 types with built-in scan tracking via Google Sheets. Features logo overlay, bulk generation, QR scanner, and campaign management.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Vedang Soni",
+    "url": "https://smsvedang.github.io"
+  },
+  "featureList": [
+    "URL QR with scan tracking",
+    "WiFi QR code",
+    "UPI Payment QR",
+    "Contact vCard QR",
+    "WhatsApp QR",
+    "SMS QR",
+    "Phone call QR",
+    "Location / Maps QR",
+    "Calendar Event QR",
+    "Bulk QR generation",
+    "Logo overlay on QR",
+    "Google Sheets scan analytics",
+    "QR Scanner from image"
+  ],
+  "softwareVersion": "2.0",
+  "inLanguage": ["en", "hi"],
+  "isAccessibleForFree": true
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -1127,8 +1190,19 @@ function doGet(e) {
   try { logScan(id, e); } catch (err) {}
 
   return HtmlService.createHtmlOutput(
-    '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=' + finalUrl + '"><script>window.location.replace("' + finalUrl + '")<\/script></head><body><p>Redirecting... <a href="' + finalUrl + '">Click here</a></p></body></html>'
-  );
+    '<!DOCTYPE html><html><head><title>Redirecting...</title>' +
+    '<style>body{font-family:sans-serif;background:#0f0f0f;color:#888;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center}</style>' +
+    '</head><body>' +
+    '<div><div style="font-size:32px;margin-bottom:12px">↗</div>' +
+    '<div style="font-size:15px;margin-bottom:8px">Redirecting you...</div>' +
+    '<a href="' + finalUrl + '" style="color:#4f7bff;font-size:13px">Click here if not redirected</a></div>' +
+    '<script>' +
+    'try{top.location.href="' + finalUrl + '";}catch(e){}' +
+    'window.location.replace("' + finalUrl + '");' +
+    'setTimeout(function(){window.location.href="' + finalUrl + '";},100);' +
+    '<\/script>' +
+    '</body></html>'
+  ).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function doPost(e) {
