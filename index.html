@@ -192,6 +192,22 @@ a{color:var(--blue2);text-decoration:none}
 #qr-out{display:none}
 .no-setup{display:none;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--amber)}
 
+/* ── LOGO OVERLAY ── */
+.logo-drop{border:2px dashed var(--bd2);border-radius:var(--r);padding:16px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+.logo-drop:hover{border-color:var(--blue);background:rgba(79,123,255,.04)}
+.logo-drop.has-logo{border-style:solid;border-color:rgba(31,217,142,.4);background:rgba(31,217,142,.04)}
+.logo-preview{width:60px;height:60px;object-fit:contain;border-radius:6px;margin-bottom:6px}
+.logo-pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}
+.lpos-btn{background:var(--s2);border:1px solid var(--bd);border-radius:5px;padding:5px;font-size:11px;color:var(--ink3);cursor:pointer;transition:.12s;font-family:'Outfit',sans-serif}
+.lpos-btn:hover{border-color:var(--bd2);color:var(--ink)}
+.lpos-btn.on{background:rgba(79,123,255,.15);border-color:var(--blue);color:var(--blue2)}
+.logo-size-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+
+/* ── COPYRIGHT FOOTER ── */
+.rail-copy{padding:10px 14px;font-size:10px;color:var(--ink3);line-height:1.5;border-top:1px solid var(--bd);text-align:center}
+.rail-copy a{color:var(--ink3);text-decoration:none}
+.rail-copy a:hover{color:var(--blue2)}
+
 @media(max-width:700px){
   .shell{grid-template-columns:1fr}
   .rail{display:none}
@@ -210,7 +226,7 @@ a{color:var(--blue2);text-decoration:none}
     <div class="brand-mark">◈</div>
     <div>
       <div class="brand-name">QR Studio</div>
-      <div class="brand-ver">v2.0</div>
+      <div class="brand-ver">v2.0 · by Vedang Soni</div>
     </div>
   </div>
 
@@ -232,10 +248,19 @@ a{color:var(--blue2);text-decoration:none}
     <button class="nitem" onclick="go('scanner',this)"><span class="ico">◉</span> QR Scanner</button>
   </div>
 
+  <div class="nav-section">
+    <div class="nav-label">Resources</div>
+    <button class="nitem" onclick="go('guide',this)"><span class="ico">📖</span> User Guide</button>
+    <button class="nitem" onclick="go('codepage',this)"><span class="ico">⌨</span> Code.gs</button>
+  </div>
+
   <div class="rail-foot">
     <button class="conn-pill warn" id="conn-pill" onclick="go('setup',document.querySelectorAll('.nitem')[3])">
       ⚠ Tracking not connected
     </button>
+  </div>
+  <div class="rail-copy">
+    © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong><br>All rights reserved
   </div>
 </aside>
 
@@ -333,8 +358,51 @@ a{color:var(--blue2);text-decoration:none}
         </div>
       </div>
 
+
+      <!-- Logo Overlay -->
+      <div style="margin-top:16px">
+        <div style="font-size:11px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Logo / Image Overlay</div>
+        <div class="logo-drop" id="logo-drop" onclick="document.getElementById('logo-file').click()" ondragover="event.preventDefault();this.style.borderColor='var(--blue)'" ondragleave="this.style.borderColor=''" ondrop="handleLogoDrop(event)">
+          <input type="file" id="logo-file" accept="image/*" style="display:none" onchange="handleLogoFile(this.files[0])">
+          <div id="logo-empty">
+            <div style="font-size:24px;margin-bottom:6px">🖼</div>
+            <div style="font-size:12px;color:var(--ink2);font-weight:500">Drop logo here or click to upload</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:3px">PNG, JPG, SVG — transparent PNG best</div>
+          </div>
+          <div id="logo-preview-wrap" style="display:none">
+            <img id="logo-preview-img" class="logo-preview">
+            <div style="font-size:11px;color:var(--green);font-weight:500" id="logo-name-display"></div>
+          </div>
+        </div>
+        <div id="logo-controls" style="display:none;margin-top:10px">
+          <div style="font-size:11px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Position</div>
+          <div class="logo-pos-grid">
+            <button class="lpos-btn" onclick="setLogoPos('tl',this)">↖ Top Left</button>
+            <button class="lpos-btn" onclick="setLogoPos('tc',this)">↑ Top Center</button>
+            <button class="lpos-btn" onclick="setLogoPos('tr',this)">↗ Top Right</button>
+            <button class="lpos-btn" onclick="setLogoPos('ml',this)">← Mid Left</button>
+            <button class="lpos-btn on" onclick="setLogoPos('mc',this)">⊙ Center</button>
+            <button class="lpos-btn" onclick="setLogoPos('mr',this)">→ Mid Right</button>
+            <button class="lpos-btn" onclick="setLogoPos('bl',this)">↙ Bot Left</button>
+            <button class="lpos-btn" onclick="setLogoPos('bc',this)">↓ Bot Center</button>
+            <button class="lpos-btn" onclick="setLogoPos('br',this)">↘ Bot Right</button>
+          </div>
+          <div class="logo-size-row">
+            <span style="font-size:11px;color:var(--ink2)">Logo Size:</span>
+            <input type="range" id="logo-size-range" min="8" max="35" value="20" oninput="document.getElementById('logo-size-val').textContent=this.value+'%'" style="flex:1;background:none;accent-color:var(--blue)">
+            <span style="font-size:11px;color:var(--ink2);min-width:32px" id="logo-size-val">20%</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;align-items:center">
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink2);text-transform:none;letter-spacing:0;cursor:pointer">
+              <input type="checkbox" id="logo-bg-check" checked style="width:auto;accent-color:var(--blue)">
+              White background behind logo
+            </label>
+            <button class="btn btn-red btn-xs" style="margin-left:auto" onclick="removeLogo()">✕ Remove</button>
+          </div>
+        </div>
+      </div>
       <!-- Presets -->
-      <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+      <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
         <span style="font-size:11px;color:var(--ink3);margin-right:2px">Presets:</span>
         <button class="btn btn-ghost btn-xs" onclick="setPreset('#000000','#ffffff')">Classic</button>
         <button class="btn btn-ghost btn-xs" onclick="setPreset('#1a1d2e','#f0f2ff')">Dark</button>
@@ -523,6 +591,97 @@ a{color:var(--blue2);text-decoration:none}
     <div class="card">
       <div class="ch">How it works</div>
       <p style="font-size:13px;color:var(--ink2);line-height:1.7">Upload any QR code image — PNG, JPG, screenshot — aur yeh tool QR ke andar ka content read kar dega. Works offline, browser mein directly process hota hai.</p>
+    </div>
+  </div>
+
+
+  <!-- ════ GUIDE ════ -->
+  <div id="p-guide" class="page" style="display:none">
+    <div style="font-size:18px;font-weight:600;margin-bottom:4px">User Guide</div>
+    <div style="font-size:13px;color:var(--ink3);margin-bottom:24px">QR Studio ka complete setup aur usage guide</div>
+
+    <div class="card" style="background:linear-gradient(135deg,rgba(79,123,255,.08),rgba(34,212,224,.06));border-color:rgba(79,123,255,.3)">
+      <div style="font-size:14px;font-weight:600;color:var(--blue2);margin-bottom:6px">◈ QR Studio kya hai?</div>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.8">Yeh ek complete QR code tool hai — 12 types ke QR banao, logo lagao, bulk generate karo, aur URL tracking ke liye Google Sheets mein scan data log karo. Koi server nahi, koi cost nahi.</p>
+    </div>
+
+    <div class="step"><div class="step-h"><div class="step-n">A</div><div class="step-title">Pehli Baar Setup (Tracking ke liye)</div></div>
+      <p>1. <a href="https://sheets.new" target="_blank" style="color:var(--blue2)">sheets.new</a> pe nayi Google Sheet banao</p>
+      <p>2. URL se Sheet ID copy karo:</p>
+      <div class="code">https://docs.google.com/spreadsheets/d/<span style="color:var(--amber)">YAHAN_WALA_ID_COPY_KARO</span>/edit</div>
+      <p>3. <kbd>⌨ Code.gs</kbd> sidebar tab pe jao → saara script code copy karo</p>
+      <p>4. <a href="https://script.google.com" target="_blank" style="color:var(--blue2)">script.google.com</a> → New project → Code.gs mein paste karo</p>
+      <p>5. Line 2 pe <code>SHEET_ID</code> mein apna Sheet ID daalo → Save</p>
+      <p>6. <kbd>Deploy</kbd> → <kbd>New deployment</kbd> → Type: Web app → Execute as: Me → Access: Anyone → Deploy</p>
+      <p>7. URL copy karo → <kbd>⚙ Setup</kbd> tab mein paste karo</p>
+    </div>
+
+    <div class="step"><div class="step-h"><div class="step-n">B</div><div class="step-title">QR Code Banana</div></div>
+      <p>1. <kbd>✦ Create QR</kbd> tab pe jao</p>
+      <p>2. Type select karo — URL, WiFi, UPI, Contact, etc.</p>
+      <p>3. Details bharo → Style aur size choose karo</p>
+      <p>4. Optionally logo upload karo (neeche waala section)</p>
+      <p>5. <kbd>✦ Generate QR Code</kbd> dabao → PNG/SVG/Hi-Res download karo</p>
+    </div>
+
+    <div class="step"><div class="step-h"><div class="step-n">C</div><div class="step-title">Logo Overlay — QR pe apna logo lagao</div></div>
+      <p>Style section mein <strong style="color:var(--ink)">Logo / Image Overlay</strong> mein PNG/JPG upload karo.</p>
+      <p>Position choose karo — center sabse common hai branded QRs ke liye.</p>
+      <p>Error Correction ko <strong style="color:var(--ink)">H (High)</strong> pe rakhna recommended hai jab logo center mein ho.</p>
+      <p>Download karo → Logo automatically QR ke upar composite ho jaata hai.</p>
+    </div>
+
+    <div class="step"><div class="step-h"><div class="step-n">D</div><div class="step-title">⭐ URL Badalna Bina Reprint Kiye</div></div>
+      <p>URL type ke tracked QRs mein — <kbd>Tracked QRs</kbd> tab → <kbd>✎ Edit</kbd> → nayi URL daalo.</p>
+      <p>Same printed QR, new destination. Posters, stickers, parcels — kuch bhi print ho — URL baad mein change ho sakti hai.</p>
+    </div>
+
+    <div class="step"><div class="step-h"><div class="step-n">E</div><div class="step-title">QR Types Guide</div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:4px">
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">🔗 URL</div><div style="font-size:12px;color:var(--ink3)">Website, offer page, form — scan trackable</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">📝 Text</div><div style="font-size:12px;color:var(--ink3)">Serial no, instructions, notes</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">📶 WiFi</div><div style="font-size:12px;color:var(--ink3)">Password share without showing it</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">👤 Contact</div><div style="font-size:12px;color:var(--ink3)">Digital business card — scan to save</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">💳 UPI Pay</div><div style="font-size:12px;color:var(--ink3)">Payment QR with optional amount</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">💚 WhatsApp</div><div style="font-size:12px;color:var(--ink3)">Direct chat with pre-filled message</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">📍 Location</div><div style="font-size:12px;color:var(--ink3)">Google Maps drop pin</div></div>
+        <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">🔢 Number</div><div style="font-size:12px;color:var(--ink3)">Order ID, batch no, serial no</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(240,92,92,.2);background:rgba(240,92,92,.04)">
+      <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:8px">Common Problems</div>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:8px">❓ <strong style="color:var(--ink)">Scan hota hai lekin Sheets mein data nahi:</strong> Apps Script → Manage deployments → Access: "Anyone" confirm karo. Naya deployment banana pad sakta hai.</p>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:8px">❓ <strong style="color:var(--ink)">Test connection fail:</strong> Normal hai — CORS browser mein block karta hai. Seedha phone se QR scan karke test karo.</p>
+      <p style="font-size:13px;color:var(--ink2)">❓ <strong style="color:var(--ink)">Location data blank:</strong> Local/VPN IP se geo kaam nahi karta. Public IP se scan karo.</p>
+    </div>
+
+    <div style="text-align:center;padding:20px;color:var(--ink3);font-size:12px;border-top:1px solid var(--bd);margin-top:8px">
+      © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong> · QR Studio · All rights reserved
+    </div>
+  </div>
+
+  <!-- ════ CODE.GS PAGE ════ -->
+  <div id="p-codepage" class="page" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:18px;font-weight:600;margin-bottom:4px">Code.gs — Google Apps Script</div>
+        <div style="font-size:13px;color:var(--ink3)">Yeh code Google Apps Script mein paste karo</div>
+      </div>
+      <button class="btn btn-blue btn-sm" onclick="copyCodeGs()">⎘ Copy All Code</button>
+    </div>
+
+    <div class="card" style="background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.25);margin-bottom:16px">
+      <div style="font-size:13px;color:var(--amber);font-weight:500">⚠ Line 2 pe <code style="background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.3)">APNI_SHEET_ID_YAHAN</code> ki jagah apna Google Sheet ID daalna na bhoolo</div>
+    </div>
+
+    <div style="position:relative">
+      <pre id="code-gs-display" style="background:var(--bg);border:1px solid var(--bd);border-radius:var(--rl);padding:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);overflow-x:auto;white-space:pre;line-height:1.65;max-height:600px;overflow-y:auto"></pre>
+      <button onclick="copyCodeGs()" class="btn btn-ghost btn-xs" style="position:absolute;top:10px;right:10px">⎘ Copy</button>
+    </div>
+
+    <div style="text-align:center;padding:20px;color:var(--ink3);font-size:12px;border-top:1px solid var(--bd);margin-top:16px">
+      © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong> · QR Studio · Google Apps Script Backend
     </div>
   </div>
 
@@ -813,8 +972,264 @@ window.onload=()=>{
 // ═══════════════════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════════════════
-const PAGES={create:'Create QR Code',history:'QR History',tracked:'Tracked QRs',setup:'Tracking Setup',bulk:'Bulk Generator',scanner:'QR Scanner'};
-const SUBS={create:'Choose type → Fill details → Generate',history:'Locally saved QR codes',tracked:'Scans logged in Google Sheets',setup:'One-time configuration',bulk:'Multiple QR codes at once',scanner:'Read QR code from image'};
+const PAGES={create:'Create QR Code',history:'QR History',tracked:'Tracked QRs',setup:'Tracking Setup',bulk:'Bulk Generator',scanner:'QR Scanner',guide:'User Guide',codepage:'Code.gs — Apps Script'};
+const SUBS={create:'Choose type → Fill details → Generate',history:'Locally saved QR codes',tracked:'Scans logged in Google Sheets',setup:'One-time configuration',bulk:'Multiple QR codes at once',scanner:'Read QR code from image',guide:'Step-by-step setup and usage',codepage:'Copy this into Google Apps Script'};
+
+
+
+// ═══════════════════════════════════════════════════
+//  LOGO OVERLAY
+// ═══════════════════════════════════════════════════
+const LOGO = { img: null, pos: 'mc', size: 20, bg: true };
+
+function handleLogoDrop(e){
+  e.preventDefault();
+  document.getElementById('logo-drop').style.borderColor='';
+  const file = e.dataTransfer.files[0];
+  if(file) handleLogoFile(file);
+}
+
+function handleLogoFile(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+      LOGO.img = img;
+      const wrap = document.getElementById('logo-preview-wrap');
+      const empty = document.getElementById('logo-empty');
+      const prev = document.getElementById('logo-preview-img');
+      const name = document.getElementById('logo-name-display');
+      prev.src = e.target.result;
+      name.textContent = '✓ ' + file.name;
+      wrap.style.display = 'block';
+      empty.style.display = 'none';
+      document.getElementById('logo-drop').classList.add('has-logo');
+      document.getElementById('logo-controls').style.display = 'block';
+      toast('Logo loaded!', 'ok');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeLogo(){
+  LOGO.img = null;
+  document.getElementById('logo-preview-wrap').style.display = 'none';
+  document.getElementById('logo-empty').style.display = 'block';
+  document.getElementById('logo-drop').classList.remove('has-logo');
+  document.getElementById('logo-controls').style.display = 'none';
+  document.getElementById('logo-file').value = '';
+  toast('Logo removed');
+}
+
+function setLogoPos(pos, btn){
+  LOGO.pos = pos;
+  document.querySelectorAll('.lpos-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// Composite canvas: QR + Logo
+function getCompositeCanvas(targetSize){
+  const srcCv = document.querySelector('#qr-canvas canvas');
+  if(!srcCv) return null;
+
+  const cv = document.createElement('canvas');
+  cv.width = targetSize; cv.height = targetSize;
+  const ctx = cv.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  // Draw QR
+  ctx.drawImage(srcCv, 0, 0, targetSize, targetSize);
+
+  // Overlay logo
+  if(LOGO.img){
+    const pct = parseInt(document.getElementById('logo-size-range').value) / 100;
+    const lw = Math.round(targetSize * pct);
+    const lh = Math.round(lw * (LOGO.img.height / LOGO.img.width));
+    const pad = Math.round(targetSize * 0.02);
+
+    const POS = {
+      tl:{x:pad, y:pad},
+      tc:{x:(targetSize-lw)/2, y:pad},
+      tr:{x:targetSize-lw-pad, y:pad},
+      ml:{x:pad, y:(targetSize-lh)/2},
+      mc:{x:(targetSize-lw)/2, y:(targetSize-lh)/2},
+      mr:{x:targetSize-lw-pad, y:(targetSize-lh)/2},
+      bl:{x:pad, y:targetSize-lh-pad},
+      bc:{x:(targetSize-lw)/2, y:targetSize-lh-pad},
+      br:{x:targetSize-lw-pad, y:targetSize-lh-pad}
+    };
+    const {x, y} = POS[LOGO.pos] || POS.mc;
+
+    const bgCheck = document.getElementById('logo-bg-check');
+    if(bgCheck && bgCheck.checked){
+      const bpad = Math.round(targetSize * 0.015);
+      ctx.fillStyle = '#ffffff';
+      roundRect(ctx, x - bpad, y - bpad, lw + bpad*2, lh + bpad*2, Math.round(targetSize*0.015));
+    }
+    ctx.drawImage(LOGO.img, x, y, lw, lh);
+  }
+  return cv;
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+  ctx.fill();
+}
+
+// ═══════════════════════════════════════════════════
+//  CODE.GS PAGE
+// ═══════════════════════════════════════════════════
+const CODE_GS_TEXT = `// =====================================================
+// QR Studio — Google Apps Script (v2)
+// © 2025 Vedang Soni · All rights reserved
+// CORS-safe: GET supports JSONP, POST uses no-cors
+// =====================================================
+
+const SHEET_ID    = 'APNI_SHEET_ID_YAHAN';  // <- Yahan apni Google Sheet ID daalo
+const SHEET_SCANS = 'Scans';
+const SHEET_QRS   = 'QR_Codes';
+
+function doGet(e) {
+  const id       = e.parameter.id;
+  const callback = e.parameter.callback;
+  const payload  = e.parameter.payload;
+
+  // JSONP read request from dashboard
+  if (callback && payload) {
+    try {
+      const data = JSON.parse(decodeURIComponent(payload));
+      let result = {};
+      if (data.action === 'list')     result = { success: true, qrs: listQRs() };
+      if (data.action === 'getStats') result = { success: true, stats: getStats(data.id) };
+      return ContentService.createTextOutput(callback + '(' + JSON.stringify(result) + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
+    } catch (err) {
+      return ContentService.createTextOutput(callback + '({"success":false})').setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+  }
+
+  if (id === '__ping__' || id === '__test__') {
+    return HtmlService.createHtmlOutput('<h2>QR Studio Active v2</h2>');
+  }
+
+  if (!id) return HtmlService.createHtmlOutput('<h2>QR Studio Active — © 2025 Vedang Soni</h2>');
+
+  const finalUrl = getFinalUrl(id);
+  if (!finalUrl) return HtmlService.createHtmlOutput('<h2>QR code not found</h2>');
+
+  try { logScan(id, e); } catch (err) {}
+
+  return HtmlService.createHtmlOutput(
+    '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=' + finalUrl + '"><script>window.location.replace("' + finalUrl + '")<\/script></head><body><p>Redirecting... <a href="' + finalUrl + '">Click here</a></p></body></html>'
+  );
+}
+
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    if (data.action === 'create') { saveQR(data.id, data.url, data.label||'', data.campaign||''); return jsonResp({success:true}); }
+    if (data.action === 'update') { updateQR(data.id, data.url, data.label); return jsonResp({success:true}); }
+    if (data.action === 'list')   return jsonResp({success:true, qrs:listQRs()});
+    if (data.action === 'getStats') return jsonResp({success:true, stats:getStats(data.id)});
+    return jsonResp({success:false, error:'Unknown action'});
+  } catch (err) { return jsonResp({success:false, error:err.toString()}); }
+}
+
+function getFinalUrl(id) {
+  const sheet = getOrCreateSheet(SHEET_QRS, ['ID','Final URL','Label','Campaign','Created At','Active']);
+  const data = sheet.getDataRange().getValues();
+  for (let i=1; i<data.length; i++) { if (data[i][0]===id && data[i][5]!==false) return data[i][1]; }
+  return null;
+}
+
+function logScan(id, e) {
+  const sheet = getOrCreateSheet(SHEET_SCANS, ['Timestamp','QR ID','IP','Device','OS','Browser','City','Country','User Agent','Referer']);
+  const ua = e.parameter['user-agent']||'', ip = getClientIp(e), referer = e.parameter.referer||'';
+  let city='', country='';
+  try {
+    if(ip && ip!=='unknown' && !ip.startsWith('127.')){
+      const geo = JSON.parse(UrlFetchApp.fetch('https://ipapi.co/'+ip+'/json/',{muteHttpExceptions:true}).getContentText());
+      if(!geo.error){ city=geo.city||''; country=geo.country_name||''; }
+    }
+  } catch(_) {}
+  const ts = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
+  sheet.appendRow([ts, id, ip, detectDevice(ua), detectOS(ua), detectBrowser(ua), city, country, ua.substring(0,200), referer]);
+}
+
+function saveQR(id, url, label, campaign) {
+  const sheet = getOrCreateSheet(SHEET_QRS, ['ID','Final URL','Label','Campaign','Created At','Active','Scan Count']);
+  const data = sheet.getDataRange().getValues();
+  for(let i=1; i<data.length; i++){
+    if(data[i][0]===id){ sheet.getRange(i+1,2).setValue(url); sheet.getRange(i+1,3).setValue(label); sheet.getRange(i+1,4).setValue(campaign); return; }
+  }
+  sheet.appendRow([id, url, label, campaign, Utilities.formatDate(new Date(),'Asia/Kolkata','yyyy-MM-dd HH:mm:ss'), true, 0]);
+}
+
+function updateQR(id, newUrl, label) {
+  const sheet = getOrCreateSheet(SHEET_QRS, []);
+  const data = sheet.getDataRange().getValues();
+  for(let i=1; i<data.length; i++){
+    if(data[i][0]===id){ sheet.getRange(i+1,2).setValue(newUrl); if(label!==undefined) sheet.getRange(i+1,3).setValue(label); return; }
+  }
+}
+
+function listQRs() {
+  const sheet = getOrCreateSheet(SHEET_QRS, []);
+  const data = sheet.getDataRange().getValues();
+  const result = [];
+  for(let i=1; i<data.length; i++){
+    if(data[i][0]) result.push({ id:data[i][0], url:data[i][1], label:data[i][2], campaign:data[i][3], createdAt:String(data[i][4]), active:data[i][5], scanCount:data[i][6]||0 });
+  }
+  return result;
+}
+
+function getStats(id) {
+  const sheet = getOrCreateSheet(SHEET_SCANS, []);
+  if(sheet.getLastRow()<2) return {total:0, rows:[]};
+  const data = sheet.getDataRange().getValues();
+  const rows = [];
+  for(let i=1; i<data.length; i++){
+    if(data[i][1]===id) rows.push({ timestamp:String(data[i][0]), device:data[i][3], os:data[i][4], browser:data[i][5], city:data[i][6], country:data[i][7] });
+  }
+  return { total:rows.length, rows:rows.slice(-50).reverse() };
+}
+
+function getOrCreateSheet(name, headers) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName(name);
+  if(!sheet && headers.length){
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
+    sheet.getRange(1,1,1,headers.length).setFontWeight('bold').setBackground('#1a1d2e').setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function getClientIp(e){ return e.parameter['X-Forwarded-For']||e.parameter['x-forwarded-for']||'unknown'; }
+function detectDevice(ua){ if(/tablet|ipad/i.test(ua)) return 'tablet'; if(/mobile|android|iphone/i.test(ua)) return 'mobile'; return 'desktop'; }
+function detectOS(ua){ if(/android/i.test(ua)) return 'Android'; if(/iphone|ipad/i.test(ua)) return 'iOS'; if(/windows/i.test(ua)) return 'Windows'; if(/mac/i.test(ua)) return 'macOS'; if(/linux/i.test(ua)) return 'Linux'; return 'Unknown'; }
+function detectBrowser(ua){ if(/ucbrowser/i.test(ua)) return 'UC Browser'; if(/opr/i.test(ua)) return 'Opera'; if(/edge/i.test(ua)) return 'Edge'; if(/chrome|crios/i.test(ua)&&!/edge/.test(ua)) return 'Chrome'; if(/firefox/i.test(ua)) return 'Firefox'; if(/safari/i.test(ua)&&!/chrome/i.test(ua)) return 'Safari'; return 'Unknown'; }
+function jsonResp(obj){ return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON); }`;
+
+function initCodePage(){
+  const el = document.getElementById('code-gs-display');
+  if(el && !el.textContent) el.textContent = CODE_GS_TEXT;
+}
+
+function copyCodeGs(){
+  navigator.clipboard.writeText(CODE_GS_TEXT).then(()=>toast('Code.gs copied!','ok')).catch(()=>{
+    const t=document.createElement('textarea');t.value=CODE_GS_TEXT;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('Copied!','ok');
+  });
+}
+
 
 function go(page,btn){
   document.querySelectorAll('.page').forEach(p=>p.style.display='none');
@@ -826,6 +1241,7 @@ function go(page,btn){
   document.getElementById('tb-sub').textContent=SUBS[page]||'';
   if(page==='history')renderHistory();
   if(page==='tracked')loadTracked();
+  if(page==='codepage')initCodePage();
 }
 
 // ═══════════════════════════════════════════════════
@@ -941,48 +1357,37 @@ function resetCreate(){
 //  DOWNLOAD
 // ═══════════════════════════════════════════════════
 function dlPNG(){
-  const cv=document.querySelector('#qr-canvas canvas')||document.querySelector('#qr-canvas img');
-  if(!cv)return toast('Generate karo pehle','err');
-  const a=document.createElement('a');
-  a.download=`qr-${S.curType}-${Date.now()}.png`;
-  if(cv.tagName==='CANVAS')a.href=cv.toDataURL('image/png');
-  else a.href=cv.src;
+  const size = parseInt(document.getElementById('qr-size').value);
+  const cv = getCompositeCanvas(size) || document.querySelector('#qr-canvas canvas');
+  if(!cv) return toast('Generate karo pehle','err');
+  const a = document.createElement('a');
+  a.download = 'qr-' + S.curType + '-' + Date.now() + '.png';
+  a.href = cv.toDataURL('image/png');
   a.click();
 }
 
 function dlSVG(){
-  // Build high-quality SVG using canvas data
-  const cv=document.querySelector('#qr-canvas canvas');
-  if(!cv)return toast('Generate karo pehle','err');
-  const size=parseInt(document.getElementById('qr-size').value);
-  // Create high-res canvas
-  const hc=document.createElement('canvas');
-  hc.width=size;hc.height=size;
-  const ctx=hc.getContext('2d');
-  ctx.drawImage(cv,0,0,size,size);
-  const dataUrl=hc.toDataURL('image/png');
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}"><image href="${dataUrl}" width="${size}" height="${size}"/></svg>`;
-  const blob=new Blob([svg],{type:'image/svg+xml'});
-  const a=document.createElement('a');
-  a.download=`qr-${S.curType}-${Date.now()}.svg`;
-  a.href=URL.createObjectURL(blob);
+  const size = parseInt(document.getElementById('qr-size').value);
+  const cv = getCompositeCanvas(size) || document.querySelector('#qr-canvas canvas');
+  if(!cv) return toast('Generate karo pehle','err');
+  const dataUrl = cv.toDataURL('image/png');
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '"><image href="' + dataUrl + '" width="' + size + '" height="' + size + '"/></svg>';
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.download = 'qr-' + S.curType + '-' + Date.now() + '.svg';
+  a.href = URL.createObjectURL(blob);
   a.click();
 }
 
 function dlHiRes(){
-  const cv=document.querySelector('#qr-canvas canvas');
-  if(!cv)return toast('Generate karo pehle','err');
-  const size=parseInt(document.getElementById('qr-size').value);
-  const hc=document.createElement('canvas');
-  hc.width=size;hc.height=size;
-  const ctx=hc.getContext('2d');
-  ctx.imageSmoothingEnabled=false;
-  ctx.drawImage(cv,0,0,size,size);
-  const a=document.createElement('a');
-  a.download=`qr-hires-${size}px-${Date.now()}.png`;
-  a.href=hc.toDataURL('image/png');
+  const size = parseInt(document.getElementById('qr-size').value);
+  const cv = getCompositeCanvas(size);
+  if(!cv) return toast('Generate karo pehle','err');
+  const a = document.createElement('a');
+  a.download = 'qr-hires-' + size + 'px-' + Date.now() + '.png';
+  a.href = cv.toDataURL('image/png');
   a.click();
-  toast(`${size}px PNG downloaded`,'ok');
+  toast(size + 'px PNG downloaded', 'ok');
 }
 
 // ═══════════════════════════════════════════════════
