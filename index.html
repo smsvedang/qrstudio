@@ -42,7 +42,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "QR Studio",
-  "url": "https://unlimitfreeqrgenerator.vercel.app",
+  "url": "https://smsvedang.github.io/qr-studio/",
   "description": "Free QR code generator supporting 12 types with built-in scan tracking via Google Sheets. Features logo overlay, bulk generation, QR scanner, and campaign management.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
@@ -76,7 +76,7 @@
   "isAccessibleForFree": true
 }
 </script>
-
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -104,17 +104,17 @@
   --rl:14px;
 }
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6;min-height:100vh}
-
+ 
 /* ── SHELL ── */
 .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-
+ 
 /* ── SIDEBAR ── */
 .rail{background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
 .brand{padding:20px 18px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px}
 .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .brand-name{font-size:16px;font-weight:700;background:linear-gradient(90deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .brand-ver{font-size:10px;color:var(--ink3);font-family:'JetBrains Mono',monospace}
-
+ 
 .nav-section{padding:10px 10px 4px}
 .nav-label{font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;padding:0 8px;margin-bottom:4px}
 .nitem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;border:none;background:none;color:var(--ink2);font-size:13px;font-family:'Outfit',sans-serif;font-weight:500;cursor:pointer;width:100%;text-align:left;transition:.15s;margin-bottom:1px;position:relative}
@@ -124,25 +124,25 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 .nitem .ico{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .nitem .badge{margin-left:auto;background:var(--blue);color:#fff;font-size:10px;padding:1px 6px;border-radius:100px;font-weight:600}
 .nitem .new{margin-left:auto;background:var(--green);color:#000;font-size:9px;padding:1px 6px;border-radius:100px;font-weight:700;letter-spacing:.03em}
-
+ 
 .rail-foot{padding:12px;border-top:1px solid var(--bd);margin-top:auto}
 .conn-pill{border-radius:8px;padding:9px 12px;font-size:12px;font-weight:500;cursor:pointer;border:none;width:100%;text-align:left;font-family:'Outfit',sans-serif;transition:.15s}
 .conn-pill.warn{background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
 .conn-pill.ok{background:rgba(31,217,142,.08);color:var(--green);border:1px solid rgba(31,217,142,.2)}
-
+ 
 /* ── MAIN ── */
 .main{display:flex;flex-direction:column;min-width:0}
 .topbar{padding:16px 28px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;background:var(--s1);position:sticky;top:0;z-index:10}
 .topbar-title{font-size:16px;font-weight:600}
 .topbar-sub{font-size:12px;color:var(--ink3);margin-top:1px}
 .content{padding:28px;flex:1}
-
+ 
 /* ── CARDS ── */
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:22px;margin-bottom:16px}
 .card.glow{border-color:rgba(79,123,255,.3);box-shadow:0 0 0 1px rgba(79,123,255,.1),0 4px 24px rgba(79,123,255,.08)}
 .ch{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .ch::after{content:'';flex:1;height:1px;background:var(--bd)}
-
+ 
 /* ── FORM ── */
 .fl{display:flex;flex-direction:column;gap:14px}
 .fg{display:flex;flex-direction:column;gap:5px}
@@ -154,7 +154,7 @@ input::placeholder,textarea::placeholder{color:var(--ink3)}
 select option{background:var(--s2)}
 .hint{font-size:11px;color:var(--ink3)}
 .char-count{font-size:11px;color:var(--ink3);text-align:right;margin-top:-10px}
-
+ 
 /* ── QR TYPE GRID ── */
 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-bottom:20px}
 .type-btn{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:12px 6px 10px;cursor:pointer;text-align:center;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:5px}
@@ -163,7 +163,7 @@ select option{background:var(--s2)}
 .type-btn .ti{font-size:22px;line-height:1}
 .type-btn .tn{font-size:11px;font-weight:500;color:var(--ink2)}
 .type-btn.on .tn{color:var(--blue2)}
-
+ 
 /* ── QR PREVIEW AREA ── */
 .preview-wrap{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
 #qr-box{background:#fff;padding:14px;border-radius:12px;flex-shrink:0;display:inline-block}
@@ -174,7 +174,7 @@ select option{background:var(--s2)}
 .copy-btn:hover{color:var(--blue2)}
 .dl-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .saved-note{font-size:12px;color:var(--green);min-height:18px;margin-top:6px}
-
+ 
 /* ── STYLE CONTROLS ── */
 .style-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .color-pair{display:flex;flex-direction:column;gap:5px}
@@ -186,7 +186,7 @@ select option{background:var(--s2)}
 .ecc-btn{flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:6px 4px;font-size:11px;font-weight:600;color:var(--ink2);cursor:pointer;text-align:center;transition:.15s;font-family:'Outfit',sans-serif}
 .ecc-btn:hover{border-color:var(--bd2);color:var(--ink)}
 .ecc-btn.on{background:rgba(79,123,255,.15);border-color:var(--blue);color:var(--blue2)}
-
+ 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:var(--r);font-size:13px;font-family:'Outfit',sans-serif;font-weight:500;cursor:pointer;border:none;transition:.15s;white-space:nowrap}
 .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -200,7 +200,7 @@ select option{background:var(--s2)}
 .btn-sm{padding:6px 12px;font-size:12px}
 .btn-xs{padding:4px 9px;font-size:11px}
 .btn-full{width:100%;padding:12px}
-
+ 
 /* ── BADGES ── */
 .bdg{display:inline-block;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:600}
 .bdg-blue{background:rgba(79,123,255,.15);color:var(--blue2)}
@@ -209,7 +209,7 @@ select option{background:var(--s2)}
 .bdg-purple{background:rgba(169,123,255,.12);color:var(--purple)}
 .bdg-red{background:rgba(240,92,92,.12);color:var(--red)}
 .bdg-pink{background:rgba(240,107,172,.12);color:var(--pink)}
-
+ 
 /* ── HISTORY LIST ── */
 .hist-item{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rl);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
 .hist-thumb{width:56px;height:56px;background:#fff;border-radius:8px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
@@ -219,7 +219,7 @@ select option{background:var(--s2)}
 .hist-type{font-size:11px;color:var(--ink3);margin-bottom:4px}
 .hist-val{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hist-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
-
+ 
 /* ── SETUP ── */
 .step{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rl);padding:18px;margin-bottom:12px}
 .step-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -229,7 +229,7 @@ select option{background:var(--s2)}
 .code{background:var(--bg);border:1px solid var(--bd);border-radius:7px;padding:10px 13px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);white-space:pre-wrap;margin:8px 0;line-height:1.6}
 kbd{background:var(--s3);border:1px solid var(--bd2);border-radius:5px;padding:1px 7px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink)}
 code{background:var(--s2);border:1px solid var(--bd);border-radius:4px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)}
-
+ 
 /* ── MODAL ── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px;opacity:0;pointer-events:none;transition:.2s}
 .overlay.on{opacity:1;pointer-events:all}
@@ -239,7 +239,7 @@ code{background:var(--s2);border:1px solid var(--bd);border-radius:4px;padding:1
 .modal-title{font-size:17px;font-weight:600}
 .close-btn{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:22px;line-height:1;padding:0 4px;border-radius:5px;transition:.15s}
 .close-btn:hover{color:var(--ink)}
-
+ 
 /* ── STATS ── */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .stat{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px}
@@ -249,13 +249,13 @@ table{width:100%;border-collapse:collapse;font-size:12px}
 th{text-align:left;padding:8px 10px;color:var(--ink3);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.06em;border-bottom:1px solid var(--bd)}
 td{padding:9px 10px;border-bottom:1px solid rgba(35,40,68,.5);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-
+ 
 /* ── TOAST ── */
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--s3);border:1px solid var(--bd2);border-radius:10px;padding:10px 20px;font-size:13px;color:var(--ink);opacity:0;transition:.25s;pointer-events:none;z-index:999;white-space:nowrap}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.ok{border-color:rgba(31,217,142,.4);color:var(--green)}
 #toast.err{border-color:rgba(240,92,92,.4);color:var(--red)}
-
+ 
 /* ── MISC ── */
 .empty{text-align:center;padding:40px;color:var(--ink3);font-size:13px}
 .loading{text-align:center;padding:28px;color:var(--ink3);font-size:13px}
@@ -264,7 +264,7 @@ a{color:var(--blue2);text-decoration:none}
 .tag{display:inline-flex;align-items:center;gap:4px;background:var(--s3);border:1px solid var(--bd);border-radius:6px;padding:3px 8px;font-size:11px;color:var(--ink2)}
 #qr-out{display:none}
 .no-setup{display:none;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--amber)}
-
+ 
 /* ── LOGO OVERLAY ── */
 .logo-drop{border:2px dashed var(--bd2);border-radius:var(--r);padding:16px;text-align:center;cursor:pointer;transition:.15s;position:relative}
 .logo-drop:hover{border-color:var(--blue);background:rgba(79,123,255,.04)}
@@ -275,12 +275,12 @@ a{color:var(--blue2);text-decoration:none}
 .lpos-btn:hover{border-color:var(--bd2);color:var(--ink)}
 .lpos-btn.on{background:rgba(79,123,255,.15);border-color:var(--blue);color:var(--blue2)}
 .logo-size-row{display:flex;gap:8px;align-items:center;margin-top:8px}
-
+ 
 /* ── COPYRIGHT FOOTER ── */
 .rail-copy{padding:10px 14px;font-size:10px;color:var(--ink3);line-height:1.5;border-top:1px solid var(--bd);text-align:center}
 .rail-copy a{color:var(--ink3);text-decoration:none}
 .rail-copy a:hover{color:var(--blue2)}
-
+ 
 @media(max-width:700px){
   .shell{grid-template-columns:1fr}
   .rail{display:none}
@@ -292,7 +292,7 @@ a{color:var(--blue2);text-decoration:none}
 </head>
 <body>
 <div class="shell">
-
+ 
 <!-- ── SIDEBAR ── -->
 <aside class="rail">
   <div class="brand">
@@ -302,41 +302,41 @@ a{color:var(--blue2);text-decoration:none}
       <div class="brand-ver">v2.0 · by Vedang Soni</div>
     </div>
   </div>
-
+ 
   <div class="nav-section">
     <div class="nav-label">Generate</div>
     <button class="nitem on" onclick="go('create',this)"><span class="ico">✦</span> Create QR</button>
     <button class="nitem" onclick="go('history',this)"><span class="ico">◷</span> History</button>
   </div>
-
+ 
   <div class="nav-section">
     <div class="nav-label">Tracking</div>
     <button class="nitem" onclick="go('tracked',this)"><span class="ico">⬡</span> Tracked QRs <span class="badge" id="tracked-count">0</span></button>
     <button class="nitem" onclick="go('setup',this)"><span class="ico">⚙</span> Setup</button>
   </div>
-
+ 
   <div class="nav-section">
     <div class="nav-label">Tools</div>
     <button class="nitem" onclick="go('bulk',this)"><span class="ico">⊞</span> Bulk Generate <span class="new">NEW</span></button>
     <button class="nitem" onclick="go('scanner',this)"><span class="ico">◉</span> QR Scanner</button>
   </div>
-
+ 
   <div class="nav-section">
     <div class="nav-label">Resources</div>
     <button class="nitem" onclick="go('guide',this)"><span class="ico">📖</span> User Guide</button>
     <button class="nitem" onclick="go('codepage',this)"><span class="ico">⌨</span> Code.gs</button>
   </div>
-
+ 
   <div class="rail-foot">
     <button class="conn-pill warn" id="conn-pill" onclick="go('setup',document.querySelectorAll('.nitem')[3])">
-      ⚠ Tracking not connected
+      ⚠ Worker not connected
     </button>
   </div>
   <div class="rail-copy">
     © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong><br>All rights reserved
   </div>
 </aside>
-
+ 
 <!-- ── MAIN ── -->
 <main class="main">
   <div class="topbar">
@@ -349,15 +349,15 @@ a{color:var(--blue2);text-decoration:none}
       <button class="btn btn-blue btn-sm" onclick="go('create',document.querySelectorAll('.nitem')[0])">+ New QR</button>
     </div>
   </div>
-
+ 
   <div class="content">
-
+ 
   <!-- ════ CREATE ════ -->
   <div id="p-create" class="page on">
     <div id="no-setup-warn" class="no-setup">
-      ⚠ <strong>Tracking not set up.</strong> QR will work but scans won't be logged. <button onclick="go('setup',document.querySelectorAll('.nitem')[3])" style="background:none;border:none;color:var(--blue2);cursor:pointer;font-size:13px;font-family:inherit;padding:0">Setup karo →</button>
+      ⚠ <strong>Cloudflare Worker setup nahi hua.</strong> QR banegi lekin scans log nahi honge. <button onclick="go('setup',document.querySelectorAll('.nitem')[3])" style="background:none;border:none;color:var(--blue2);cursor:pointer;font-size:13px;font-family:inherit;padding:0">Setup karo →</button>
     </div>
-
+ 
     <!-- TYPE SELECTOR -->
     <div class="card">
       <div class="ch">QR Type</div>
@@ -376,13 +376,13 @@ a{color:var(--blue2);text-decoration:none}
         <button class="type-btn" onclick="setType('number',this)"><span class="ti">🔢</span><span class="tn">Number</span></button>
       </div>
     </div>
-
+ 
     <!-- DYNAMIC FORM -->
     <div class="card" id="type-form-card">
       <div class="ch" id="form-title">URL / Link</div>
       <div id="type-form"></div>
     </div>
-
+ 
     <!-- STYLE CONTROLS -->
     <div class="card">
       <div class="ch">Style & Size</div>
@@ -430,8 +430,8 @@ a{color:var(--blue2);text-decoration:none}
           <datalist id="camp-list"></datalist>
         </div>
       </div>
-
-
+ 
+ 
       <!-- Logo Overlay -->
       <div style="margin-top:16px">
         <div style="font-size:11px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Logo / Image Overlay</div>
@@ -470,7 +470,7 @@ a{color:var(--blue2);text-decoration:none}
               <input type="checkbox" id="logo-bg-check" checked style="width:auto;accent-color:var(--blue)" onchange="refreshPreviewOverlay()">
               White background behind logo
             </label>
-
+ 
             <button class="btn btn-red btn-xs" style="margin-left:auto" onclick="removeLogo()">✕ Remove</button>
           </div>
         </div>
@@ -486,9 +486,9 @@ a{color:var(--blue2);text-decoration:none}
         <button class="btn btn-ghost btn-xs" onclick="setPreset('#f05c5c','#fff0f0')">Red</button>
       </div>
     </div>
-
+ 
     <button class="btn btn-blue btn-full" onclick="doGenerate()">✦ Generate QR Code</button>
-
+ 
     <!-- RESULT -->
     <div id="qr-out" class="card glow" style="margin-top:16px">
       <div class="ch">Your QR Code</div>
@@ -518,7 +518,7 @@ a{color:var(--blue2);text-decoration:none}
       </div>
     </div>
   </div>
-
+ 
   <!-- ════ HISTORY ════ -->
   <div id="p-history" class="page" style="display:none">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
@@ -533,7 +533,7 @@ a{color:var(--blue2);text-decoration:none}
     </div>
     <div id="hist-body"><div class="empty">Koi QR nahi abhi</div></div>
   </div>
-
+ 
   <!-- ════ TRACKED ════ -->
   <div id="p-tracked" class="page" style="display:none">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
@@ -545,12 +545,19 @@ a{color:var(--blue2);text-decoration:none}
     </div>
     <div id="tracked-body"><div class="loading">Loading...</div></div>
   </div>
-
+ 
   <!-- ════ SETUP ════ -->
   <div id="p-setup" class="page" style="display:none">
     <div style="font-size:18px;font-weight:600;margin-bottom:4px">Tracking Setup</div>
-    <div style="font-size:13px;color:var(--ink3);margin-bottom:24px">Ek baar setup karo — phir sab scans Google Sheets mein log hote hain</div>
-
+    <div style="font-size:13px;color:var(--ink3);margin-bottom:20px">Ek baar setup karo — phir sab scans Google Sheets mein log hote hain</div>
+ 
+    <div style="background:rgba(79,123,255,.08);border:1px solid rgba(79,123,255,.2);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--ink2);line-height:1.7">
+      <strong style="color:var(--blue2)">Architecture:</strong>
+      QR Scan → <strong style="color:var(--ink)">Cloudflare Worker</strong> (proper HTTP redirect) → Final URL
+      &nbsp;&nbsp;+&nbsp;&nbsp;
+      Worker logs data → <strong style="color:var(--ink)">Apps Script</strong> → Google Sheets
+    </div>
+ 
     <div class="step">
       <div class="step-h"><div class="step-n">1</div><div class="step-title">Google Sheet banao</div></div>
       <p>Nayi Google Sheet banao → URL se ID copy karo:</p>
@@ -563,27 +570,39 @@ a{color:var(--blue2);text-decoration:none}
         <a href="https://sheets.new" target="_blank" class="btn btn-ghost btn-sm">Open Sheets ↗</a>
       </div>
     </div>
-
+ 
     <div class="step">
       <div class="step-h"><div class="step-n">2</div><div class="step-title">Apps Script deploy karo</div></div>
-      <p>1. <a href="https://script.google.com" target="_blank">script.google.com</a> → New project</p>
-      <p>2. <code>Code.gs</code> ka saara code paste karo, line 7 pe SHEET_ID daalo</p>
-      <p>3. <kbd>Deploy</kbd> → <kbd>New deployment</kbd> → Type: <kbd>Web app</kbd></p>
-      <p>4. Execute as: <kbd>Me</kbd> | Access: <kbd>Anyone</kbd> → Deploy → URL copy karo</p>
+      <p>1. <a href="https://script.google.com" target="_blank" style="color:var(--blue2)">script.google.com</a> → New project</p>
+      <p>2. Sidebar mein <kbd>⌨ Code.gs</kbd> tab pe jao → <kbd>⎘ Copy All Code</kbd> → Apps Script mein paste karo</p>
+      <p>3. Line 10 pe <code>SHEET_ID</code> mein apna Sheet ID daalo → <kbd>Ctrl+S</kbd> save karo</p>
+      <p>4. <kbd>Deploy</kbd> → <kbd>New deployment</kbd> → Type: <kbd>Web app</kbd> → Execute as: <kbd>Me</kbd> → Access: <kbd>Anyone</kbd> → Deploy</p>
+      <p>5. <strong style="color:var(--ink)">Apps Script URL copy karo</strong> — next step mein lagegi</p>
     </div>
-
+ 
     <div class="step">
-      <div class="step-h"><div class="step-n">3</div><div class="step-title">URL yahan paste karo</div></div>
+      <div class="step-h"><div class="step-n">3</div><div class="step-title">Cloudflare Worker deploy karo</div></div>
+      <p>1. <a href="https://workers.cloudflare.com" target="_blank" style="color:var(--blue2)">cloudflare.com</a> → Free account → <strong style="color:var(--ink)">Workers &amp; Pages → Create Worker</strong></p>
+      <p>2. <strong style="color:var(--ink)">"Start with Hello World!"</strong> → naam do (jaise <code>qr-redirect</code>) → Deploy karo</p>
+      <p>3. <strong style="color:var(--ink)">"Edit Code"</strong> → saara code delete karo → Sidebar mein <kbd>⌨ Code.gs</kbd> tab → neeche <kbd>worker.js</kbd> section se code copy karo → paste karo</p>
+      <p>4. Line 8 pe <code>APPS_SCRIPT_URL</code> mein Step 2 ka URL daalo</p>
+      <p>5. <kbd>Save and Deploy</kbd> → <strong style="color:var(--ink)">Worker URL copy karo</strong></p>
+      <div class="code">Worker URL example: https://qr-redirect.<span style="color:var(--amber)">tumhara-naam</span>.workers.dev</div>
+    </div>
+ 
+    <div class="step">
+      <div class="step-h"><div class="step-n">4</div><div class="step-title">Worker URL yahan paste karo</div></div>
       <div style="margin-bottom:12px">
-        <label>Apps Script Web App URL</label>
-        <input id="s-url" placeholder="https://script.google.com/macros/s/AKfyc.../exec" oninput="saveSetup()" style="margin-top:5px">
+        <label>Cloudflare Worker URL</label>
+        <input id="s-url" placeholder="https://qr-redirect.vedang.workers.dev" oninput="saveSetup()" style="margin-top:5px">
+        <div style="font-size:11px;color:var(--ink3);margin-top:4px">QR codes is URL ke /r/:id format mein generate honge</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <button class="btn btn-blue btn-sm" onclick="testConn()">Test Connection</button>
         <span id="test-res" style="font-size:12px"></span>
       </div>
     </div>
-
+ 
     <div class="step">
       <div class="step-h"><div class="step-n" style="background:var(--green)">✓</div><div class="step-title">Name (optional)</div></div>
       <div>
@@ -591,13 +610,12 @@ a{color:var(--blue2);text-decoration:none}
         <input id="s-org" placeholder="Sahyog Medical" oninput="saveSetup()" style="margin-top:5px">
       </div>
     </div>
-  </div>
-
+ 
   <!-- ════ BULK ════ -->
   <div id="p-bulk" class="page" style="display:none">
     <div style="font-size:18px;font-weight:600;margin-bottom:4px">Bulk QR Generator</div>
     <div style="font-size:13px;color:var(--ink3);margin-bottom:24px">Ek saath multiple QR codes generate karo</div>
-
+ 
     <div class="card">
       <div class="ch">Enter Items (one per line)</div>
       <div class="fg" style="margin-bottom:14px">
@@ -629,7 +647,7 @@ a{color:var(--blue2);text-decoration:none}
       </div>
       <button class="btn btn-blue" style="margin-top:16px;width:100%;padding:11px" onclick="doBulk()">⊞ Generate All QR Codes</button>
     </div>
-
+ 
     <div id="bulk-out" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <div style="font-size:14px;font-weight:600" id="bulk-out-title"></div>
@@ -638,12 +656,12 @@ a{color:var(--blue2);text-decoration:none}
       <div id="bulk-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
     </div>
   </div>
-
+ 
   <!-- ════ SCANNER ════ -->
   <div id="p-scanner" class="page" style="display:none">
     <div style="font-size:18px;font-weight:600;margin-bottom:4px">QR Scanner</div>
     <div style="font-size:13px;color:var(--ink3);margin-bottom:24px">Image upload karke QR code read karo</div>
-
+ 
     <div class="card" style="text-align:center">
       <div style="border:2px dashed var(--bd2);border-radius:var(--r);padding:40px 20px;margin-bottom:16px;cursor:pointer;transition:.15s" id="drop-zone" onclick="document.getElementById('scan-file').click()" ondragover="event.preventDefault();this.style.borderColor='var(--blue)'" ondragleave="this.style.borderColor=''" ondrop="handleDrop(event)">
         <div style="font-size:40px;margin-bottom:12px">◉</div>
@@ -661,35 +679,36 @@ a{color:var(--blue2);text-decoration:none}
         <div id="scan-actions" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"></div>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="ch">How it works</div>
       <p style="font-size:13px;color:var(--ink2);line-height:1.7">Upload any QR code image — PNG, JPG, screenshot — aur yeh tool QR ke andar ka content read kar dega. Works offline, browser mein directly process hota hai.</p>
     </div>
   </div>
-
-
+ 
+ 
   <!-- ════ GUIDE ════ -->
   <div id="p-guide" class="page" style="display:none">
     <div style="font-size:18px;font-weight:600;margin-bottom:4px">User Guide</div>
     <div style="font-size:13px;color:var(--ink3);margin-bottom:24px">QR Studio ka complete setup aur usage guide</div>
-
+ 
     <div class="card" style="background:linear-gradient(135deg,rgba(79,123,255,.08),rgba(34,212,224,.06));border-color:rgba(79,123,255,.3)">
       <div style="font-size:14px;font-weight:600;color:var(--blue2);margin-bottom:6px">◈ QR Studio kya hai?</div>
       <p style="font-size:13px;color:var(--ink2);line-height:1.8">Yeh ek complete QR code tool hai — 12 types ke QR banao, logo lagao, bulk generate karo, aur URL tracking ke liye Google Sheets mein scan data log karo. Koi server nahi, koi cost nahi.</p>
     </div>
-
+ 
     <div class="step"><div class="step-h"><div class="step-n">A</div><div class="step-title">Pehli Baar Setup (Tracking ke liye)</div></div>
-      <p>1. <a href="https://sheets.new" target="_blank" style="color:var(--blue2)">sheets.new</a> pe nayi Google Sheet banao</p>
-      <p>2. URL se Sheet ID copy karo:</p>
-      <div class="code">https://docs.google.com/spreadsheets/d/<span style="color:var(--amber)">YAHAN_WALA_ID_COPY_KARO</span>/edit</div>
-      <p>3. <kbd>⌨ Code.gs</kbd> sidebar tab pe jao → saara script code copy karo</p>
-      <p>4. <a href="https://script.google.com" target="_blank" style="color:var(--blue2)">script.google.com</a> → New project → Code.gs mein paste karo</p>
-      <p>5. Line 2 pe <code>SHEET_ID</code> mein apna Sheet ID daalo → Save</p>
-      <p>6. <kbd>Deploy</kbd> → <kbd>New deployment</kbd> → Type: Web app → Execute as: Me → Access: Anyone → Deploy</p>
-      <p>7. URL copy karo → <kbd>⚙ Setup</kbd> tab mein paste karo</p>
-    </div>
-
+      <p style="color:var(--blue2);font-weight:500;margin-bottom:10px">Architecture: QR → Cloudflare Worker (proper HTTP redirect) → Final URL + Sheets mein log</p>
+ 
+      <p><strong style="color:var(--ink)">Step 1 — Google Sheet:</strong> <a href="https://sheets.new" target="_blank" style="color:var(--blue2)">sheets.new</a> pe sheet banao → URL se Sheet ID copy karo</p>
+ 
+      <p><strong style="color:var(--ink)">Step 2 — Apps Script:</strong> <a href="https://script.google.com" target="_blank" style="color:var(--blue2)">script.google.com</a> → New project → <kbd>⌨ Code.gs</kbd> tab se code copy karo → paste karo → Line 10 pe Sheet ID daalo → Deploy as Web app (Me / Anyone) → URL copy karo</p>
+ 
+      <p><strong style="color:var(--ink)">Step 3 — Cloudflare Worker:</strong> <a href="https://workers.cloudflare.com" target="_blank" style="color:var(--blue2)">cloudflare.com</a> → Workers &amp; Pages → Create → "Start with Hello World!" → Edit Code → worker.js code paste karo → Line 8 pe Apps Script URL daalo → Save and Deploy → Worker URL copy karo</p>
+ 
+      <p><strong style="color:var(--ink)">Step 4 — Connect:</strong> <kbd>⚙ Setup</kbd> tab → Worker URL paste karo → Test karo ✓</p>
+    </div></div>
+ 
     <div class="step"><div class="step-h"><div class="step-n">B</div><div class="step-title">QR Code Banana</div></div>
       <p>1. <kbd>✦ Create QR</kbd> tab pe jao</p>
       <p>2. Type select karo — URL, WiFi, UPI, Contact, etc.</p>
@@ -697,19 +716,19 @@ a{color:var(--blue2);text-decoration:none}
       <p>4. Optionally logo upload karo (neeche waala section)</p>
       <p>5. <kbd>✦ Generate QR Code</kbd> dabao → PNG/SVG/Hi-Res download karo</p>
     </div>
-
+ 
     <div class="step"><div class="step-h"><div class="step-n">C</div><div class="step-title">Logo Overlay — QR pe apna logo lagao</div></div>
       <p>Style section mein <strong style="color:var(--ink)">Logo / Image Overlay</strong> mein PNG/JPG upload karo.</p>
       <p>Position choose karo — center sabse common hai branded QRs ke liye.</p>
       <p>Error Correction ko <strong style="color:var(--ink)">H (High)</strong> pe rakhna recommended hai jab logo center mein ho.</p>
       <p>Download karo → Logo automatically QR ke upar composite ho jaata hai.</p>
     </div>
-
+ 
     <div class="step"><div class="step-h"><div class="step-n">D</div><div class="step-title">⭐ URL Badalna Bina Reprint Kiye</div></div>
       <p>URL type ke tracked QRs mein — <kbd>Tracked QRs</kbd> tab → <kbd>✎ Edit</kbd> → nayi URL daalo.</p>
       <p>Same printed QR, new destination. Posters, stickers, parcels — kuch bhi print ho — URL baad mein change ho sakti hai.</p>
     </div>
-
+ 
     <div class="step"><div class="step-h"><div class="step-n">E</div><div class="step-title">QR Types Guide</div></div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:4px">
         <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">🔗 URL</div><div style="font-size:12px;color:var(--ink3)">Website, offer page, form — scan trackable</div></div>
@@ -722,19 +741,19 @@ a{color:var(--blue2);text-decoration:none}
         <div style="background:var(--s3);border-radius:8px;padding:10px 12px"><div style="font-weight:600;margin-bottom:3px">🔢 Number</div><div style="font-size:12px;color:var(--ink3)">Order ID, batch no, serial no</div></div>
       </div>
     </div>
-
+ 
     <div class="card" style="border-color:rgba(240,92,92,.2);background:rgba(240,92,92,.04)">
       <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:8px">Common Problems</div>
       <p style="font-size:13px;color:var(--ink2);margin-bottom:8px">❓ <strong style="color:var(--ink)">Scan hota hai lekin Sheets mein data nahi:</strong> Apps Script → Manage deployments → Access: "Anyone" confirm karo. Naya deployment banana pad sakta hai.</p>
-      <p style="font-size:13px;color:var(--ink2);margin-bottom:8px">❓ <strong style="color:var(--ink)">Test connection fail:</strong> Normal hai — CORS browser mein block karta hai. Seedha phone se QR scan karke test karo.</p>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:8px">❓ <strong style="color:var(--ink)">Scans Sheets mein nahi aa rahe:</strong> Worker ke Code mein APPS_SCRIPT_URL check karo. Apps Script deployment mein Access: "Anyone" hona chahiye.</p>
       <p style="font-size:13px;color:var(--ink2)">❓ <strong style="color:var(--ink)">Location data blank:</strong> Local/VPN IP se geo kaam nahi karta. Public IP se scan karo.</p>
     </div>
-
+ 
     <div style="text-align:center;padding:20px;color:var(--ink3);font-size:12px;border-top:1px solid var(--bd);margin-top:8px">
       © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong> · QR Studio · All rights reserved
     </div>
   </div>
-
+ 
   <!-- ════ CODE.GS PAGE ════ -->
   <div id="p-codepage" class="page" style="display:none">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:10px">
@@ -744,25 +763,25 @@ a{color:var(--blue2);text-decoration:none}
       </div>
       <button class="btn btn-blue btn-sm" onclick="copyCodeGs()">⎘ Copy All Code</button>
     </div>
-
+ 
     <div class="card" style="background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.25);margin-bottom:16px">
       <div style="font-size:13px;color:var(--amber);font-weight:500">⚠ Line 2 pe <code style="background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.3)">APNI_SHEET_ID_YAHAN</code> ki jagah apna Google Sheet ID daalna na bhoolo</div>
     </div>
-
+ 
     <div style="position:relative">
       <pre id="code-gs-display" style="background:var(--bg);border:1px solid var(--bd);border-radius:var(--rl);padding:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);overflow-x:auto;white-space:pre;line-height:1.65;max-height:600px;overflow-y:auto"></pre>
       <button onclick="copyCodeGs()" class="btn btn-ghost btn-xs" style="position:absolute;top:10px;right:10px">⎘ Copy</button>
     </div>
-
+ 
     <div style="text-align:center;padding:20px;color:var(--ink3);font-size:12px;border-top:1px solid var(--bd);margin-top:16px">
       © 2025 <strong style="color:var(--ink2)">Vedang Soni</strong> · QR Studio · Google Apps Script Backend
     </div>
   </div>
-
+ 
   </div><!-- /content -->
 </main>
 </div>
-
+ 
 <!-- ── STATS MODAL ── -->
 <div class="overlay" id="stats-ov" onclick="closeModal('stats-ov')">
   <div class="modal" onclick="event.stopPropagation()">
@@ -773,7 +792,7 @@ a{color:var(--blue2);text-decoration:none}
     <div id="sm-body"><div class="loading">Loading…</div></div>
   </div>
 </div>
-
+ 
 <!-- ── EDIT MODAL ── -->
 <div class="overlay" id="edit-ov" onclick="closeModal('edit-ov')">
   <div class="modal" onclick="event.stopPropagation()">
@@ -793,12 +812,12 @@ a{color:var(--blue2);text-decoration:none}
     </div>
   </div>
 </div>
-
+ 
 <div id="toast"></div>
-
+ 
 <!-- ── QR SCANNER LIBRARY ── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
-
+ 
 <script>
 // ═══════════════════════════════════════════════════
 //  STATE
@@ -813,7 +832,7 @@ const S = {
   ecc:       'M',
   history:   JSON.parse(ls('qs_hist')||'[]'),
 };
-
+ 
 // ═══════════════════════════════════════════════════
 //  QR TYPE FORMS
 // ═══════════════════════════════════════════════════
@@ -1030,7 +1049,7 @@ const TYPES = {
     }
   },
 };
-
+ 
 // ═══════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════
@@ -1042,27 +1061,27 @@ window.onload=()=>{
   updateTrackedCount();
   if(!S.scriptUrl) document.getElementById('no-setup-warn').style.display='block';
 };
-
+ 
 // ═══════════════════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════════════════
 const PAGES={create:'Create QR Code',history:'QR History',tracked:'Tracked QRs',setup:'Tracking Setup',bulk:'Bulk Generator',scanner:'QR Scanner',guide:'User Guide',codepage:'Code.gs — Apps Script'};
 const SUBS={create:'Choose type → Fill details → Generate',history:'Locally saved QR codes',tracked:'Scans logged in Google Sheets',setup:'One-time configuration',bulk:'Multiple QR codes at once',scanner:'Read QR code from image',guide:'Step-by-step setup and usage',codepage:'Copy this into Google Apps Script'};
-
-
-
+ 
+ 
+ 
 // ═══════════════════════════════════════════════════
 //  LOGO OVERLAY
 // ═══════════════════════════════════════════════════
 const LOGO = { img: null, pos: 'mc', size: 20, bg: true };
-
+ 
 function handleLogoDrop(e){
   e.preventDefault();
   document.getElementById('logo-drop').style.borderColor='';
   const file = e.dataTransfer.files[0];
   if(file) handleLogoFile(file);
 }
-
+ 
 function handleLogoFile(file){
   if(!file) return;
   const reader = new FileReader();
@@ -1087,7 +1106,7 @@ function handleLogoFile(file){
   };
   reader.readAsDataURL(file);
 }
-
+ 
 function removeLogo(){
   LOGO.img = null;
   document.getElementById('logo-preview-wrap').style.display = 'none';
@@ -1099,14 +1118,14 @@ function removeLogo(){
   if(old) old.remove();
   toast('Logo removed');
 }
-
+ 
 function setLogoPos(pos, btn){
   LOGO.pos = pos;
   document.querySelectorAll('.lpos-btn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
   refreshPreviewOverlay();
 }
-
+ 
 // ── Draw logo onto a canvas at given size ──
 function drawLogoOnCanvas(cv, size){
   if(!LOGO.img) return;
@@ -1115,7 +1134,7 @@ function drawLogoOnCanvas(cv, size){
   const lw  = Math.round(size * pct);
   const lh  = Math.round(lw * (LOGO.img.height / LOGO.img.width));
   const pad = Math.round(size * 0.025);
-
+ 
   const POS = {
     tl:{x:pad,          y:pad},
     tc:{x:(size-lw)/2,  y:pad},
@@ -1128,7 +1147,7 @@ function drawLogoOnCanvas(cv, size){
     br:{x:size-lw-pad,  y:size-lh-pad}
   };
   const {x, y} = POS[LOGO.pos] || POS.mc;
-
+ 
   // White bg behind logo
   const bgCheck = document.getElementById('logo-bg-check');
   if(bgCheck && bgCheck.checked){
@@ -1139,13 +1158,13 @@ function drawLogoOnCanvas(cv, size){
     ctx.roundRect(x-bp, y-bp, lw+bp*2, lh+bp*2, r);
     ctx.fill();
   }
-
+ 
   // Draw logo — smooth for images
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(LOGO.img, x, y, lw, lh);
 }
-
+ 
 // Composite canvas for download
 function getCompositeCanvas(targetSize){
   const srcCv=document.querySelector('#qr-canvas canvas');
@@ -1163,30 +1182,30 @@ function getCompositeCanvas(targetSize){
   if(LOGO.img) drawLogoOnCanvas(cv,total);
   return cv;
 }
-
+ 
 // Live preview overlay — draws onto a visible canvas on top of the QR
 function refreshPreviewOverlay(){
   // Remove old overlay canvas if any
   const old = document.getElementById('logo-overlay-canvas');
   if(old) old.remove();
-
+ 
   const qrBox = document.getElementById('qr-box');
   const srcCv = qrBox.querySelector('canvas');
   if(!srcCv) return;
-
+ 
   const size = srcCv.offsetWidth || srcCv.width;
-
+ 
   const overlay = document.createElement('canvas');
   overlay.id = 'logo-overlay-canvas';
   overlay.width  = size;
   overlay.height = size;
   overlay.style.cssText = 'position:absolute;top:14px;left:14px;pointer-events:none;border-radius:4px';
   qrBox.style.position = 'relative';
-
+ 
   if(LOGO.img) drawLogoOnCanvas(overlay, size);
   qrBox.appendChild(overlay);
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  CODE.GS PAGE
 // ═══════════════════════════════════════════════════
@@ -1195,16 +1214,16 @@ const CODE_GS_TEXT = `// =====================================================
 // © 2025 Vedang Soni · All rights reserved
 // REDIRECT FIX: ContentService HTML — proper browser redirect
 // =====================================================
-
+ 
 const SHEET_ID    = 'APNI_SHEET_ID_YAHAN';  // <- Yahan apni Google Sheet ID daalo
 const SHEET_SCANS = 'Scans';
 const SHEET_QRS   = 'QR_Codes';
-
+ 
 function doGet(e) {
   const id       = e.parameter.id;
   const callback = e.parameter.callback;
   const payload  = e.parameter.payload;
-
+ 
   // JSONP read request from dashboard
   if (callback && payload) {
     try {
@@ -1217,20 +1236,20 @@ function doGet(e) {
       return ContentService.createTextOutput(callback + '({"success":false})').setMimeType(ContentService.MimeType.JAVASCRIPT);
     }
   }
-
+ 
   if (id === '__ping__' || id === '__test__') {
     return HtmlService.createHtmlOutput('<h2>QR Studio Active v2</h2>');
   }
-
+ 
   if (!id) return HtmlService.createHtmlOutput('<h2>QR Studio Active — © 2025 Vedang Soni</h2>');
-
+ 
   const finalUrl = getFinalUrl(id);
   if (!finalUrl) {
     return ContentService.createTextOutput('<html><body style="font-family:sans-serif;text-align:center;padding:60px"><h2>QR not found</h2></body></html>').setMimeType(ContentService.MimeType.HTML);
   }
-
+ 
   try { logScan(id, e); } catch (err) {}
-
+ 
   var html = '<!DOCTYPE html><html><head><meta charset=\"utf-8\">' +
     '<meta http-equiv=\"refresh\" content=\"0;url=' + finalUrl + '\">' +
     '</head><body style=\"font-family:sans-serif;background:#f5f5f5;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0\">' +
@@ -1240,7 +1259,7 @@ function doGet(e) {
     '</body></html>';
   return ContentService.createTextOutput(html).setMimeType(ContentService.MimeType.HTML);
 }
-
+ 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
@@ -1251,14 +1270,14 @@ function doPost(e) {
     return jsonResp({success:false, error:'Unknown action'});
   } catch (err) { return jsonResp({success:false, error:err.toString()}); }
 }
-
+ 
 function getFinalUrl(id) {
   const sheet = getOrCreateSheet(SHEET_QRS, ['ID','Final URL','Label','Campaign','Created At','Active']);
   const data = sheet.getDataRange().getValues();
   for (let i=1; i<data.length; i++) { if (data[i][0]===id && data[i][5]!==false) return data[i][1]; }
   return null;
 }
-
+ 
 function logScan(id, e) {
   const sheet = getOrCreateSheet(SHEET_SCANS, ['Timestamp','QR ID','IP','Device','OS','Browser','City','Country','User Agent','Referer']);
   const ua = e.parameter['user-agent']||'', ip = getClientIp(e), referer = e.parameter.referer||'';
@@ -1272,7 +1291,7 @@ function logScan(id, e) {
   const ts = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
   sheet.appendRow([ts, id, ip, detectDevice(ua), detectOS(ua), detectBrowser(ua), city, country, ua.substring(0,200), referer]);
 }
-
+ 
 function saveQR(id, url, label, campaign) {
   const sheet = getOrCreateSheet(SHEET_QRS, ['ID','Final URL','Label','Campaign','Created At','Active','Scan Count']);
   const data = sheet.getDataRange().getValues();
@@ -1281,7 +1300,7 @@ function saveQR(id, url, label, campaign) {
   }
   sheet.appendRow([id, url, label, campaign, Utilities.formatDate(new Date(),'Asia/Kolkata','yyyy-MM-dd HH:mm:ss'), true, 0]);
 }
-
+ 
 function updateQR(id, newUrl, label) {
   const sheet = getOrCreateSheet(SHEET_QRS, []);
   const data = sheet.getDataRange().getValues();
@@ -1289,7 +1308,7 @@ function updateQR(id, newUrl, label) {
     if(data[i][0]===id){ sheet.getRange(i+1,2).setValue(newUrl); if(label!==undefined) sheet.getRange(i+1,3).setValue(label); return; }
   }
 }
-
+ 
 function listQRs() {
   const sheet = getOrCreateSheet(SHEET_QRS, []);
   const data = sheet.getDataRange().getValues();
@@ -1299,7 +1318,7 @@ function listQRs() {
   }
   return result;
 }
-
+ 
 function getStats(id) {
   const sheet = getOrCreateSheet(SHEET_SCANS, []);
   if(sheet.getLastRow()<2) return {total:0, rows:[]};
@@ -1310,7 +1329,7 @@ function getStats(id) {
   }
   return { total:rows.length, rows:rows.slice(-50).reverse() };
 }
-
+ 
 function getOrCreateSheet(name, headers) {
   const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(name);
@@ -1322,25 +1341,25 @@ function getOrCreateSheet(name, headers) {
   }
   return sheet;
 }
-
+ 
 function getClientIp(e){ return e.parameter['X-Forwarded-For']||e.parameter['x-forwarded-for']||'unknown'; }
 function detectDevice(ua){ if(/tablet|ipad/i.test(ua)) return 'tablet'; if(/mobile|android|iphone/i.test(ua)) return 'mobile'; return 'desktop'; }
 function detectOS(ua){ if(/android/i.test(ua)) return 'Android'; if(/iphone|ipad/i.test(ua)) return 'iOS'; if(/windows/i.test(ua)) return 'Windows'; if(/mac/i.test(ua)) return 'macOS'; if(/linux/i.test(ua)) return 'Linux'; return 'Unknown'; }
 function detectBrowser(ua){ if(/ucbrowser/i.test(ua)) return 'UC Browser'; if(/opr/i.test(ua)) return 'Opera'; if(/edge/i.test(ua)) return 'Edge'; if(/chrome|crios/i.test(ua)&&!/edge/.test(ua)) return 'Chrome'; if(/firefox/i.test(ua)) return 'Firefox'; if(/safari/i.test(ua)&&!/chrome/i.test(ua)) return 'Safari'; return 'Unknown'; }
 function jsonResp(obj){ return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON); }`;
-
+ 
 function initCodePage(){
   const el = document.getElementById('code-gs-display');
   if(el && !el.textContent) el.textContent = CODE_GS_TEXT;
 }
-
+ 
 function copyCodeGs(){
   navigator.clipboard.writeText(CODE_GS_TEXT).then(()=>toast('Code.gs copied!','ok')).catch(()=>{
     const t=document.createElement('textarea');t.value=CODE_GS_TEXT;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('Copied!','ok');
   });
 }
-
-
+ 
+ 
 function go(page,btn){
   document.querySelectorAll('.page').forEach(p=>p.style.display='none');
   document.querySelectorAll('.nitem').forEach(b=>b.classList.remove('on'));
@@ -1353,7 +1372,7 @@ function go(page,btn){
   if(page==='tracked')loadTracked();
   if(page==='codepage')initCodePage();
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  TYPE SWITCHING
 // ═══════════════════════════════════════════════════
@@ -1367,7 +1386,7 @@ function setType(type,btn){
   // Hide result
   document.getElementById('qr-out').style.display='none';
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  GENERATE
 // ═══════════════════════════════════════════════════
@@ -1375,35 +1394,35 @@ function doGenerate(){
   const t=TYPES[S.curType];
   const content=t.build();
   if(!content)return;
-
+ 
   S.curContent=content;
-
+ 
   const size=parseInt(document.getElementById('qr-size').value);
   const fg=document.getElementById('fg-color').value;
   const bg=document.getElementById('bg-color').value;
   const label=document.getElementById('qr-label').value.trim();
   const campaign=document.getElementById('qr-campaign').value.trim();
-
+ 
   // Tracking for URL type
   let qrContent=content;
   let tracked=false;
   let trackId='';
   let trackUrl='';
-
+ 
   if(t.tracked && S.scriptUrl){
     trackId=document.querySelector('#type-form input')?.value?.trim().replace(/[^a-z0-9-]/gi,'-').substring(0,20) || rndId();
     trackId=rndId(); // always fresh
-    trackUrl=S.scriptUrl+'?id='+encodeURIComponent(trackId);
+    trackUrl=S.scriptUrl.replace(/\/+$/,'')+'/r/'+encodeURIComponent(trackId);
     qrContent=trackUrl;
     tracked=true;
   }
-
+ 
   S.curId=trackId;
-
+ 
   // Render QR
   document.getElementById('qr-canvas').innerHTML='';
   document.getElementById('qr-out').style.display='none';
-
+ 
   new QRCode(document.getElementById('qr-canvas'),{
     text:qrContent,
     width:Math.min(size,300),
@@ -1412,7 +1431,7 @@ function doGenerate(){
     colorLight:bg,
     correctLevel:QRCode.CorrectLevel[S.ecc]
   });
-
+ 
   // Update info
   document.getElementById('r-content').textContent=content.length>120?content.substring(0,120)+'…':content;
   const tw=document.getElementById('r-tracking-wrap');
@@ -1422,13 +1441,13 @@ function doGenerate(){
   } else {
     tw.style.display='none';
   }
-
+ 
   document.getElementById('r-saved').textContent='';
   const tags=document.getElementById('r-tags');
   tags.innerHTML=`<span class="tag">${t.icon} ${t.label}</span>${campaign?`<span class="tag">📁 ${esc(campaign)}</span>`:''}${tracked?'<span class="tag" style="color:var(--green)">⬡ Tracked</span>':''}`;
-
+ 
   document.getElementById('qr-out').style.display='block';
-
+ 
   // Save to history
   saveHistory({
     id:trackId||rndId(),
@@ -1442,7 +1461,7 @@ function doGenerate(){
     fg,bg,size,
     ts:Date.now()
   });
-
+ 
   // Save to sheets if tracked
   if(tracked){
     apiPost({action:'create',id:trackId,url:content,label:label||'',campaign:campaign||''})
@@ -1451,12 +1470,12 @@ function doGenerate(){
   } else {
     toast('QR generated!','ok');
   }
-
+ 
   document.getElementById('qr-out').scrollIntoView({behavior:'smooth',block:'nearest'});
   // Refresh logo overlay on newly rendered QR
   setTimeout(refreshPreviewOverlay, 150);
 }
-
+ 
 function resetCreate(){
   document.getElementById('qr-out').style.display='none';
   document.querySelectorAll('#type-form input,#type-form textarea,#type-form select').forEach(el=>{
@@ -1464,7 +1483,7 @@ function resetCreate(){
   });
   document.getElementById('qr-label').value='';
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  DOWNLOAD
 // ═══════════════════════════════════════════════════
@@ -1477,7 +1496,7 @@ function dlPNG(){
   a.href = cv.toDataURL('image/png');
   a.click();
 }
-
+ 
 function dlSVG(){
   const size = parseInt(document.getElementById('qr-size').value);
   const cv = getCompositeCanvas(size) || document.querySelector('#qr-canvas canvas');
@@ -1490,7 +1509,7 @@ function dlSVG(){
   a.href = URL.createObjectURL(blob);
   a.click();
 }
-
+ 
 function dlHiRes(){
   const size = parseInt(document.getElementById('qr-size').value);
   const cv = getCompositeCanvas(size);
@@ -1501,7 +1520,7 @@ function dlHiRes(){
   a.click();
   toast(size + 'px PNG downloaded', 'ok');
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  STYLE CONTROLS
 // ═══════════════════════════════════════════════════
@@ -1524,7 +1543,7 @@ function setPreset(fg,bg){
   document.getElementById('bg-color').value=bg;
   document.getElementById('bg-hex').value=bg;
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  HISTORY
 // ═══════════════════════════════════════════════════
@@ -1533,7 +1552,7 @@ function saveHistory(item){
   if(S.history.length>50)S.history=S.history.slice(0,50);
   lsSet('qs_hist',JSON.stringify(S.history));
 }
-
+ 
 function renderHistory(items){
   items=items||S.history;
   const b=document.getElementById('hist-body');
@@ -1555,12 +1574,12 @@ function renderHistory(items){
       </div>
     </div>`).join('');
 }
-
+ 
 function filterHistory(){
   const q=document.getElementById('hist-search').value.toLowerCase();
   renderHistory(q?S.history.filter(h=>(h.label+h.content+h.type+h.campaign).toLowerCase().includes(q)):S.history);
 }
-
+ 
 function reDownload(qrText,fg,bg,size){
   const tmp=document.createElement('div');
   tmp.style.cssText='position:absolute;left:-9999px;top:0';
@@ -1585,18 +1604,18 @@ function reDownload(qrText,fg,bg,size){
     document.body.removeChild(tmp);
   },300);
 }
-
+ 
 function clearHistory(){
   if(!confirm('Clear all history?'))return;
   S.history=[];lsSet('qs_hist','[]');renderHistory();
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  TRACKED QRs
 // ═══════════════════════════════════════════════════
 async function loadTracked(){
   const b=document.getElementById('tracked-body');
-  if(!S.scriptUrl){b.innerHTML='<div class="empty">Setup tab mein Apps Script URL daalo pehle</div>';return;}
+  if(!S.scriptUrl){b.innerHTML='<div class="empty">Setup tab mein Worker URL daalo pehle</div>';return;}
   b.innerHTML='<div class="loading">Loading…</div>';
   try{
     const d=await apiPost({action:'list'});
@@ -1606,7 +1625,7 @@ async function loadTracked(){
     b.innerHTML=qrs.map(q=>`
       <div class="hist-item">
         <div class="hist-thumb">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=${encodeURIComponent(S.scriptUrl+'?id='+q.id)}" loading="lazy">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=${encodeURIComponent(S.scriptUrl.replace(/\/+$/,'')+'/r/'+q.id)}" loading="lazy">
         </div>
         <div class="hist-info">
           <div class="hist-label">${esc(q.label||q.id)}</div>
@@ -1620,12 +1639,12 @@ async function loadTracked(){
       </div>`).join('');
   }catch(e){b.innerHTML=`<div class="empty" style="color:var(--red)">Error: ${esc(e.message)}</div>`;}
 }
-
+ 
 function updateTrackedCount(n){
   if(n===undefined)n=S.history.filter(h=>h.tracked).length;
   document.getElementById('tracked-count').textContent=n;
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  STATS MODAL
 // ═══════════════════════════════════════════════════
@@ -1665,7 +1684,7 @@ async function openStats(id,label){
     document.getElementById('sm-body').innerHTML=html;
   }catch(e){document.getElementById('sm-body').innerHTML=`<div class="empty" style="color:var(--red)">${esc(e.message)}</div>`;}
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  EDIT MODAL
 // ═══════════════════════════════════════════════════
@@ -1692,7 +1711,7 @@ async function doEditSave(){
   }catch(e){toast('Update failed: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent='Save Changes';}
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  BULK
 // ═══════════════════════════════════════════════════
@@ -1700,7 +1719,7 @@ function updateBulkCount(){
   const lines=document.getElementById('bulk-input').value.split('\n').filter(l=>l.trim()).length;
   document.getElementById('bulk-count').textContent=`(${lines} items)`;
 }
-
+ 
 function doBulk(){
   const lines=document.getElementById('bulk-input').value.split('\n').filter(l=>l.trim());
   if(!lines.length)return toast('Items daalo pehle','err');
@@ -1708,36 +1727,36 @@ function doBulk(){
   const size=parseInt(document.getElementById('bulk-size').value);
   const fg=document.getElementById('bulk-fg').value;
   const bg=document.getElementById('bulk-bg').value;
-
+ 
   const grid=document.getElementById('bulk-grid');
   grid.innerHTML='';
   const out=document.getElementById('bulk-out');
   out.style.display='block';
   document.getElementById('bulk-out-title').textContent=`${lines.length} QR Codes`;
-
+ 
   lines.forEach((line,i)=>{
     let content=line.trim();
     if(type==='url'){try{new URL(content)}catch{content='https://'+content;}}
     if(type==='phone')content='tel:'+content.replace(/\s+/g,'');
-
+ 
     const wrap=document.createElement('div');
     wrap.style.cssText='background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center';
     const qDiv=document.createElement('div');
     qDiv.style.cssText='background:#fff;padding:8px;border-radius:6px;display:inline-block;margin-bottom:8px';
     wrap.appendChild(qDiv);
-
+ 
     const label=document.createElement('div');
     label.style.cssText='font-size:11px;color:var(--ink2);word-break:break-all;margin-bottom:8px;font-family:"JetBrains Mono",monospace';
     label.textContent=content.length>30?content.substring(0,30)+'…':content;
     wrap.appendChild(label);
-
+ 
     const dlBtn=document.createElement('button');
     dlBtn.className='btn btn-ghost btn-xs';
     dlBtn.textContent='↓ Download';
     dlBtn.style.width='100%';
     wrap.appendChild(dlBtn);
     grid.appendChild(wrap);
-
+ 
     setTimeout(()=>{
       const qr=new QRCode(qDiv,{text:content,width:Math.min(size,200),height:Math.min(size,200),colorDark:fg,colorLight:bg,correctLevel:QRCode.CorrectLevel.M});
       setTimeout(()=>{
@@ -1752,7 +1771,7 @@ function doBulk(){
     },i*100);
   });
 }
-
+ 
 function downloadAllBulk(){
   const canvases=document.querySelectorAll('#bulk-grid canvas');
   if(!canvases.length)return toast('Generate karo pehle','err');
@@ -1766,7 +1785,7 @@ function downloadAllBulk(){
   });
   toast(`Downloading ${canvases.length} QR codes…`,'ok');
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  QR SCANNER
 // ═══════════════════════════════════════════════════
@@ -1776,7 +1795,7 @@ function handleDrop(e){
   const file=e.dataTransfer.files[0];
   if(file)scanQR(file);
 }
-
+ 
 function scanQR(file){
   if(!file)return;
   const reader=new FileReader();
@@ -1821,7 +1840,7 @@ function scanQR(file){
   };
   reader.readAsDataURL(file);
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  SETUP & API
 // ═══════════════════════════════════════════════════
@@ -1840,8 +1859,8 @@ function saveSetup(){
 }
 function updateConnPill(){
   const pill=document.getElementById('conn-pill');
-  if(S.scriptUrl){pill.className='conn-pill ok';pill.textContent='✓ Tracking connected';}
-  else{pill.className='conn-pill warn';pill.textContent='⚠ Tracking not connected';}
+  if(S.scriptUrl){pill.className='conn-pill ok';pill.textContent='✓ Worker connected';}
+  else{pill.className='conn-pill warn';pill.textContent='⚠ Worker not connected';}
 }
 async function testConn(){
   const el=document.getElementById('test-res');
@@ -1849,49 +1868,42 @@ async function testConn(){
   el.innerHTML='<span style="color:var(--ink3)">Testing…</span>';
   try{
     // Use no-cors to avoid CORS block — just checking if server responds
-    await fetch(S.scriptUrl+'?id=__ping__',{mode:'no-cors'});
+    await fetch(S.scriptUrl.replace(/\/+$/,'')+'/health',{mode:'no-cors'});
     el.innerHTML='<span style="color:var(--green)">✓ Script reachable! Scan karo test ke liye.</span>';
   }catch(e){
     el.innerHTML='<span style="color:var(--red)">Unreachable — URL check karo</span>';
   }
 }
-
+ 
 // CORS-safe POST using no-cors (fire and forget for logging)
 // For data retrieval (list, stats) we need to use JSONP approach via iframe trick
 // or use a form-post approach
 async function apiPost(payload){
-  if(!S.scriptUrl)throw new Error('Script URL not set');
-
-  // For write operations (create, update) — use no-cors (fire & forget)
+  if(!S.scriptUrl) throw new Error('Worker URL not set — Setup tab mein daalo');
+  const base=S.scriptUrl.replace(/\/+$/,'');
+  // Write ops
   if(['create','update'].includes(payload.action)){
-    fetch(S.scriptUrl,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify(payload)
-    }).catch(()=>{});
-    // Optimistic success for write ops
+    try{
+      await fetch(base+'/api/'+payload.action,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+    }catch(_){}
     return {success:true};
   }
-
-  // For read operations (list, getStats) — use JSONP via script tag
-  return new Promise((resolve,reject)=>{
-    const cbName='_qrcb_'+Date.now();
-    const url=S.scriptUrl+'?callback='+cbName+'&payload='+encodeURIComponent(JSON.stringify(payload));
-    const script=document.createElement('script');
-    const timer=setTimeout(()=>{
-      cleanup();
-      // Fallback: return empty data gracefully
-      resolve({success:true,qrs:[],stats:{total:0,rows:[]}});
-    },8000);
-    window[cbName]=function(data){cleanup();resolve(data);};
-    function cleanup(){clearTimeout(timer);delete window[cbName];if(script.parentNode)script.parentNode.removeChild(script);}
-    script.onerror=()=>{cleanup();resolve({success:true,qrs:[],stats:{total:0,rows:[]}});};
-    script.src=url;
-    document.head.appendChild(script);
-  });
+  // Read ops
+  if(payload.action==='list'){
+    const r=await fetch(base+'/api/list');
+    return await r.json();
+  }
+  if(payload.action==='getStats'){
+    const r=await fetch(base+'/api/stats/'+encodeURIComponent(payload.id));
+    return await r.json();
+  }
+  return {success:false,error:'Unknown action'};
 }
-
+ 
 // ═══════════════════════════════════════════════════
 //  MISC HELPERS
 // ═══════════════════════════════════════════════════
@@ -1903,11 +1915,11 @@ function getMyLocation(){
     toast('Location captured!','ok');
   },()=>toast('Location access denied','err'));
 }
-
+ 
 function cc(el,countId){
   document.getElementById(countId).textContent=`${el.value.length} / 500`;
 }
-
+ 
 function openModal(id){document.getElementById(id).classList.add('on');}
 function closeModal(id){document.getElementById(id).classList.remove('on');}
 function copyEl(id){
@@ -1924,7 +1936,7 @@ function lsSet(k,val){try{localStorage.setItem(k,val)}catch{}}
 function cnt(o,k){o[k]=(o[k]||0)+1;}
 function topN(o,n){return Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,n);}
 function err(msg){toast(msg,'err');return null;}
-
+ 
 let toastT;
 function toast(msg,type=''){
   const el=document.getElementById('toast');
