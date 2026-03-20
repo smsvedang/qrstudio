@@ -9,14 +9,14 @@
 <meta name="author" content="Vedang Soni">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#080a12">
-<link rel="canonical" href="https://smsvedang.github.io/qr-studio/">
+<link rel="canonical" href="https://unlimitfreeqrgenerator.vercel.app">
 
 <!-- Open Graph / Facebook / WhatsApp -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://smsvedang.github.io/qr-studio/">
+<meta property="og:url" content="https://unlimitfreeqrgenerator.vercel.app">
 <meta property="og:title" content="QR Studio — Free QR Code Generator with Tracking">
 <meta property="og:description" content="Generate trackable QR codes for URL, WiFi, UPI, Contact, WhatsApp, Location & more. Scan analytics in Google Sheets. Free forever. No server needed.">
-<meta property="og:image" content="https://smsvedang.github.io/qr-studio/og-image.png">
+<meta property="og:image" content="https://unlimitfreeqrgenerator.vercel.appog-image.png">
 <meta property="og:locale" content="en_IN">
 <meta property="og:site_name" content="QR Studio by Vedang Soni">
 
@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="QR Studio — Free QR Code Generator with Tracking">
 <meta name="twitter:description" content="12 QR types · Scan tracking via Google Sheets · Logo overlay · Bulk generate · QR Scanner. Free forever.">
-<meta name="twitter:image" content="https://smsvedang.github.io/qr-studio/og-image.png">
+<meta name="twitter:image" content="https://unlimitfreeqrgenerator.vercel.appog-image.png">
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "QR Studio",
-  "url": "https://smsvedang.github.io/qr-studio/",
+  "url": "https://unlimitfreeqrgenerator.vercel.app",
   "description": "Free QR code generator supporting 12 types with built-in scan tracking via Google Sheets. Features logo overlay, bulk generation, QR scanner, and campaign management.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
@@ -1138,20 +1138,19 @@ function drawLogoOnCanvas(cv, size){
 
 // Composite canvas for download
 function getCompositeCanvas(targetSize){
-  const srcCv = document.querySelector('#qr-canvas canvas');
+  const srcCv=document.querySelector('#qr-canvas canvas');
   if(!srcCv) return null;
-
-  const cv  = document.createElement('canvas');
-  cv.width  = targetSize;
-  cv.height = targetSize;
-  const ctx = cv.getContext('2d');
-
-  // QR: nearest-neighbor scale to keep crisp modules
-  ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(srcCv, 0, 0, targetSize, targetSize);
-
-  // Logo on top
-  drawLogoOnCanvas(cv, targetSize);
+  const pad=Math.round(targetSize*0.06);
+  const total=targetSize+pad*2;
+  const bgCol=document.getElementById('bg-color').value||'#ffffff';
+  const cv=document.createElement('canvas');
+  cv.width=cv.height=total;
+  const ctx=cv.getContext('2d');
+  ctx.fillStyle=bgCol;
+  ctx.fillRect(0,0,total,total);
+  ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(srcCv,pad,pad,targetSize,targetSize);
+  if(LOGO.img) drawLogoOnCanvas(cv,total);
   return cv;
 }
 
@@ -1540,7 +1539,7 @@ function renderHistory(items){
         <div class="hist-val">${esc(h.content.length>60?h.content.substring(0,60)+'…':h.content)}</div>
       </div>
       <div class="hist-actions">
-        <button class="btn btn-ghost btn-xs" onclick="reDownload('${esc(h.content)}','${h.fg}','${h.bg}',${h.size||300})">↓</button>
+        <button class="btn btn-ghost btn-xs" onclick="reDownload(\'${esc(h.tracked&&h.trackUrl?h.trackUrl:h.content)}\',\'${h.fg}\',\'${h.bg}\',${h.size||300})">&#8595; QR</button>
         ${h.tracked?`<button class="btn btn-ghost btn-xs" onclick="openStats('${esc(h.id)}','${esc(h.label||h.id)}')">📊</button>`:''}
         ${h.tracked?`<button class="btn btn-ghost btn-xs" onclick="openEdit('${esc(h.id)}','${esc(h.content)}','${esc(h.label||'')}')">✎</button>`:''}
       </div>
@@ -1552,14 +1551,27 @@ function filterHistory(){
   renderHistory(q?S.history.filter(h=>(h.label+h.content+h.type+h.campaign).toLowerCase().includes(q)):S.history);
 }
 
-function reDownload(content,fg,bg,size){
+function reDownload(qrText,fg,bg,size){
   const tmp=document.createElement('div');
   tmp.style.cssText='position:absolute;left:-9999px;top:0';
   document.body.appendChild(tmp);
-  const qr=new QRCode(tmp,{text:content,width:size,height:size,colorDark:fg,colorLight:bg,correctLevel:QRCode.CorrectLevel.M});
+  new QRCode(tmp,{text:qrText,width:size,height:size,colorDark:fg,colorLight:bg,correctLevel:QRCode.CorrectLevel.M});
   setTimeout(()=>{
-    const cv=tmp.querySelector('canvas');
-    if(cv){const a=document.createElement('a');a.download=`qr-${Date.now()}.png`;a.href=cv.toDataURL();a.click();}
+    const srcCv=tmp.querySelector('canvas');
+    if(srcCv){
+      const pad=Math.round(size*0.06),total=size+pad*2;
+      const out=document.createElement('canvas');
+      out.width=out.height=total;
+      const ctx=out.getContext('2d');
+      ctx.fillStyle=bg||'#ffffff';
+      ctx.fillRect(0,0,total,total);
+      ctx.imageSmoothingEnabled=false;
+      ctx.drawImage(srcCv,pad,pad,size,size);
+      const a=document.createElement('a');
+      a.download=`qr-${Date.now()}.png`;
+      a.href=out.toDataURL('image/png');
+      a.click();
+    }
     document.body.removeChild(tmp);
   },300);
 }
