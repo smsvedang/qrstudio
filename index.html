@@ -11,8 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
-
-   <!-- Google tag (gtag.js) -->
+   
+    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7Y5V4PQDYM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -21,7 +21,6 @@
 
   gtag('config', 'G-7Y5V4PQDYM');
 </script>
-   
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -665,7 +664,7 @@ const TYPES = {
   sms:{
     label:'SMS', icon:'💬', tracked:false,
     fields:`<div class="fl"><div class="fg"><label>Phone *</label><input id="f-stel" placeholder="+91 98765 43210" style="margin-top:4px"></div><div class="fg"><label>Message</label><textarea id="f-smsg" rows="3" style="margin-top:4px"></textarea></div></div>`,
-    build(){ const t=v('f-stel').trim().replace(/\s+/g,''); if(!t) return err('Phone daalo'); return `sms:${t}${v('f-smsg')?'?body='+encodeURIComponent(v('f-smsg')):''}` ; }
+    build(){ const t=v('f-stel').trim().replace(/\s+/g,''); if(!t) return err('Phone daalo'); return `sms:${t}${v('f-smsg')?'?body='+encodeURIComponent(v('f-smsg')):''}`; }
   },
   phone:{
     label:'Phone', icon:'📞', tracked:false,
@@ -675,7 +674,7 @@ const TYPES = {
   wa:{
     label:'WhatsApp', icon:'💚', tracked:false,
     fields:`<div class="fl"><div class="fg"><label>WhatsApp Number * (with country code, no +)</label><input id="f-wa" placeholder="919876543210" style="margin-top:4px"></div><div class="fg"><label>Pre-filled Message</label><textarea id="f-wamsg" rows="3" style="margin-top:4px"></textarea></div></div>`,
-    build(){ const n=v('f-wa').trim().replace(/[^0-9]/g,''); if(!n) return err('Number daalo'); return `https://wa.me/${n}${v('f-wamsg')?'?text='+encodeURIComponent(v('f-wamsg')):''}` ; }
+    build(){ const n=v('f-wa').trim().replace(/[^0-9]/g,''); if(!n) return err('Number daalo'); return `https://wa.me/${n}${v('f-wamsg')?'?text='+encodeURIComponent(v('f-wamsg')):''}`; }
   },
   upi:{
     label:'UPI Pay', icon:'💳', tracked:false,
@@ -805,8 +804,20 @@ function doGenerate() {
   // Save to worker/sheets
   if (tracked) {
     apiPost({ action: 'create', id: trackId, url: content, label: label || '', campaign: camp || '' })
-      .then(() => { document.getElementById('r-saved').textContent = '✓ Saved to Google Sheets'; toast('QR created & saved!', 'ok'); updateTC(); })
-      .catch(() => { document.getElementById('r-saved').textContent = '⚠ Sheets save skipped'; });
+      .then(d => {
+        if (d && d.success) {
+          document.getElementById('r-saved').textContent = '✓ Saved to Google Sheets';
+          toast('QR created & saved!', 'ok');
+          updateTC();
+        } else {
+          document.getElementById('r-saved').textContent = '⚠ Saved failed — check Worker URL in Setup';
+          toast('Save failed — Setup tab check karo', 'err');
+        }
+      })
+      .catch(e => {
+        document.getElementById('r-saved').textContent = '⚠ Network error: ' + e.message;
+        toast('Save failed: ' + e.message, 'err');
+      });
   } else {
     toast('QR generated!', 'ok');
   }
@@ -930,9 +941,15 @@ function drawLogo(ctx, size) {
   const {x,y} = pos[LOGO.pos] || pos.mc;
   if (document.getElementById('logo-bg').checked) {
     const bp = Math.round(size * 0.018), r = Math.round(size * 0.012);
+    const rx = x-bp, ry = y-bp, rw = lw+bp*2, rh = lh+bp*2;
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.roundRect(x-bp, y-bp, lw+bp*2, lh+bp*2, r);
+    ctx.moveTo(rx+r, ry);
+    ctx.lineTo(rx+rw-r, ry); ctx.arcTo(rx+rw, ry, rx+rw, ry+r, r);
+    ctx.lineTo(rx+rw, ry+rh-r); ctx.arcTo(rx+rw, ry+rh, rx+rw-r, ry+rh, r);
+    ctx.lineTo(rx+r, ry+rh); ctx.arcTo(rx, ry+rh, rx, ry+rh-r, r);
+    ctx.lineTo(rx, ry+r); ctx.arcTo(rx, ry, rx+r, ry, r);
+    ctx.closePath();
     ctx.fill();
   }
   ctx.imageSmoothingEnabled = true;
@@ -1270,9 +1287,17 @@ async function apiPost(payload) {
   if (!S.workerUrl) throw new Error('Worker URL not set');
   const base = S.workerUrl.replace(/\/+$/, '');
   if (['create','update'].includes(payload.action)) {
-    try { await fetch(`${base}/api/${payload.action}`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); }
-    catch(_) {}
-    return { success: true };
+    const resp = await fetch(`${base}/api/${payload.action}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    try {
+      const data = await resp.json();
+      return data;
+    } catch(_) {
+      return { success: resp.ok };
+    }
   }
   if (payload.action === 'list') {
     const r = await fetch(`${base}/api/list`);
