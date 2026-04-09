@@ -1046,19 +1046,14 @@ async function shortenUrl() {
     const base = S.workerUrl.replace(/\/+$/, '');
     const id = rndId();
     const label = document.getElementById('qr-lbl')?.value?.trim() || 'Short Link';
-    // Register a short link entry using /api/shorten on the worker
-    const res = await fetch(`${base}/api/shorten`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, url, label })
-    });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.error || 'Worker returned failure');
-    const short = data.shortUrl || `${base}/r/${id}`;
+    // Use the existing /api/create — already deployed, already CORS-safe.
+    // This is the exact same call that tracked QR generation uses internally.
+    await apiPost({ action: 'create', id, url, label, campaign: 'shortener' });
+    const short = `${base}/r/${id}`;
     document.getElementById('shorten-url-val').textContent = short;
     document.getElementById('shorten-result').style.display = 'block';
     status.textContent = '';
-    toast('URL shortened via Worker! ✂', 'ok');
+    toast('Short link ready! ✂', 'ok');
   } catch (e) {
     status.style.color = 'var(--red)';
     status.textContent = '⚠ Failed: ' + e.message;
